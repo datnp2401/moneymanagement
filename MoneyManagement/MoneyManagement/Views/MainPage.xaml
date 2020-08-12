@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            mc:Ignorable="d"
+            xmlns:views="clr-namespace:MoneyManagement.Views"
+            xmlns:viewsTotalSpend="clr-namespace:MoneyManagement.Views.TotalSpend"
+            x:Class="MoneyManagement.Views.MainPage"
+            BarBackgroundColor="PaleTurquoise"
+            >
+
+    <TabbedPage.Children>
+        <NavigationPage IconImageSource="DetailMoney.png" >
+            <x:Arguments>
+                <views:SpendsPage />
+            </x:Arguments>
+        </NavigationPage>
+
+        <NavigationPage IconImageSource="MoneyTotal.png" >
+            <x:Arguments>
+                <viewsTotalSpend:TotalPage />
+            </x:Arguments>
+        </NavigationPage>
+
+        <NavigationPage IconImageSource="MoneyList.png" >
+            <x:Arguments>
+                <views:ItemsPage />
+            </x:Arguments>
+        </NavigationPage>
+
+        <NavigationPage IconImageSource="CommandTrading.png" >
+            <x:Arguments>
+                <views:AboutPage />
+            </x:Arguments>
+        </NavigationPage>
+
+        <NavigationPage IconImageSource="TradingTotal.png" >
+            <x:Arguments>
+                <views:AboutPage />
+            </x:Arguments>
+        </NavigationPage>
+
+        <NavigationPage IconImageSource="TradingList.png" >
+            <x:Arguments>
+                <views:AboutPage />
+            </x:Arguments>
+        </NavigationPage>
+
+        <NavigationPage IconImageSource="Setting.png" >
+            <x:Arguments>
+                <views:AboutPage />
+            </x:Arguments>
+        </NavigationPage>
+
+    </TabbedPage.Children>
+
+</TabbedPage>

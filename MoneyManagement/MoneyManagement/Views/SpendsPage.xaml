@@ -1,0 +1,62 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:BaseControls="clr-namespace:MoneyManagement.CustomControls"
+             x:Class="MoneyManagement.Views.SpendsPage"
+             Title="{Binding Title}"
+             x:Name="BrowseItemsPage"
+             >
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Thêm" Clicked="AddItem_Clicked" />
+    </ContentPage.ToolbarItems>
+    <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}"  Command="{Binding LoadItemsCommand}">
+        <BaseControls:CustomListView x:Name="ItemsCollectionView" ItemsSource="{Binding SpendsItemList}" HasUnevenRows="true" SeparatorVisibility="None">
+            <BaseControls:CustomListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="7,3">
+                            <Grid >
+                                <Grid.RowDefinitions>
+
+                                    <RowDefinition Height="*"></RowDefinition>
+
+                                    <RowDefinition Height="*"></RowDefinition>
+
+                                    <RowDefinition Height="*"></RowDefinition>
+
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+
+                                    <ColumnDefinition Width="50*"></ColumnDefinition>
+
+                                    <ColumnDefinition Width="50*"></ColumnDefinition>
+
+                                </Grid.ColumnDefinitions>
+
+
+                                <Label Text="{Binding Content}" FontSize="Small" FontAttributes="Bold" TextColor="Black" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" />
+
+                                <Label Text="{Binding Address}" FontSize="Small" TextColor="Black" Grid.Column="0" Grid.Row="1"/>
+
+                                <Label Text="{Binding SpendType}" FontSize="Micro" TextColor="Black"  HorizontalTextAlignment="End" Grid.Column="1" Grid.Row="1"/>
+
+                                <Label Text="{Binding DateNo, StringFormat='{0:dd/MM/yyyy hh:mm:ss}'}" TextColor="Black" FontSize="Micro" VerticalTextAlignment="End" Grid.Column="0" Grid.Row="2" />
+
+                                <Label Text="{Binding Amount, StringFormat='{0:#,##0.###}  VNĐ'}" TextColor="{Binding TextColor}" FontAttributes="Bold" FontSize="Small" HorizontalTextAlignment="End" Grid.Column="1" Grid.Row="2" />
+
+                                <Grid.GestureRecognizers>
+
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected"></TapGestureRecognizer>
+
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </BaseControls:CustomListView.ItemTemplate>
+        </BaseControls:CustomListView>
+    </RefreshView>
+</ContentPage>

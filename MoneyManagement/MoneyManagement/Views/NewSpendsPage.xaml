@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MoneyManagement.Views.NewSpendsPage"
+             Title="Tạo mới thu - chi">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Hủy" Clicked="Cancel_Clicked"/>
+        <ToolbarItem Text="Lưu"  Command="{Binding AddItemsCommand}" Clicked="Save_Clicked" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout Spacing="20" Padding="7">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25*">
+                    </ColumnDefinition>
+                    <ColumnDefinition Width="75*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label x:Name="lbSpend" Text="{Binding txtSpend, Mode=TwoWay}" FontSize="Small" VerticalOptions="Center" TextColor="Red" Grid.Column="0" Grid.Row="0" />
+                <Switch x:Name="IsSpend" Toggled="IsSpend_Toggled" IsToggled="{Binding IsCheckSpend}"  Grid.Column="1" Grid.Row="0"></Switch>
+
+                <Label Text="Thu - Chi: " FontSize="Small" VerticalOptions="Center" TextColor="Black" Grid.Column="0" Grid.Row="1" />
+                <Picker x:Name="picker" FontSize="Small" ItemsSource="{Binding SpendType}"  SelectedItem="{Binding ChooseSpendType}" SelectedIndex="{Binding ChooseSpendIndex}" Title="Loại thu - chi" TitleColor="Black" Grid.Column="1" Grid.Row="1">
+                </Picker>
+
+                <Label Text="Mô tả: " FontSize="Small" VerticalOptions="Center" TextColor="Black" Grid.Column="0" Grid.Row="2" />
+                <Editor Text="{Binding SpendsItem.Content}" d:Text="Item name" FontSize="Small" Grid.Column="1" Grid.Row="2"/>
+
+                <Label Text="Số tiền: " FontSize="Small" VerticalOptions="Center" TextColor="Black" Grid.Column="0" Grid.Row="3" />
+                <Entry Text="{Binding SpendsItem.Amount}" d:Text="Item name" FontSize="Small" Grid.Column="1" Grid.Row="3"/>
+
+                <Label Text="Địa chỉ: " FontSize="Small" VerticalOptions="Center" TextColor="Black" Grid.Column="0" Grid.Row="4" />
+                <Entry Text="{Binding SpendsItem.Address}" d:Text="Item name" FontSize="Small" Grid.Column="1" Grid.Row="4"/>
+
+                <Label Text="Ngày: " FontSize="Small" VerticalOptions="Center" TextColor="Black" Grid.Column="0" Grid.Row="5" />
+                <DatePicker Date="{Binding SpendsItem.DateNo}" MinimumDate="01/01/2018" Format="dd/MM/yyyy" FontSize="Small" Grid.Column="1" Grid.Row="5" />
+
+                <!--<Label Text="Loại T - C: " FontSize="Medium" Grid.Column="0" Grid.Row="0" />
+                <Picker x:Name="picker" ItemsSource="{Binding SpendType}" SelectedItem="{Binding ChooseSpendType}" Title="Loại thu - chi" TitleColor="Red" Grid.Column="1" Grid.Row="0">
+                    -->
+                <!--<Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Ăn uống</x:String>
+                            <x:String>Du lịch</x:String>
+                            <x:String>Trả nợ</x:String>
+                            <x:String>Tiết kiệm</x:String>
+                            <x:String>Đầu tư</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>-->
+                <!--
+                </Picker>
+
+                <Label Text="Mô tả: " FontSize="Medium" Grid.Column="0" Grid.Row="1" />
+                <Editor Text="{Binding SpendsItem.Content}" d:Text="Item name" FontSize="Small" Grid.Column="1" Grid.Row="1"/>
+
+                <Label Text="Số tiền: " FontSize="Medium" Grid.Column="0" Grid.Row="2" />
+                <Entry Text="{Binding SpendsItem.Amount}" d:Text="Item name" FontSize="Small" Grid.Column="1" Grid.Row="2"/>
+
+                <Label Text="Địa chỉ: " FontSize="Medium" Grid.Column="0" Grid.Row="3" />
+                <Entry Text="{Binding SpendsItem.Address}" d:Text="Item name" FontSize="Small" Grid.Column="1" Grid.Row="3"/>
+
+                <Label Text="Ngày: " FontSize="Medium" Grid.Column="0" Grid.Row="4" />
+                <DatePicker Date="{Binding SpendsItem.DateNo}" MinimumDate="01/01/2018" Format="dd/MM/yyyy" FontSize="Medium" Grid.Column="1" Grid.Row="4" />-->
+            </Grid>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
