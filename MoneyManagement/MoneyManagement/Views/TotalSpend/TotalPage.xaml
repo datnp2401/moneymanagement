@@ -8,7 +8,7 @@
              BackgroundColor="#d6e9e9">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout>
+            <StackLayout Padding="5,3">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"></RowDefinition>
@@ -22,9 +22,41 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="25*"></ColumnDefinition>
-                        <ColumnDefinition Width="75*"></ColumnDefinition>
+                        <ColumnDefinition Width="37.5*"></ColumnDefinition>
+                        <ColumnDefinition Width="37.5*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Text="{Binding CurrentDate}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"></Label>
+                    <Label Text="{Binding CurrentDate}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"></Label>
+
+                    <Label Text="Lương: " Grid.Column="0" Grid.Row="1"></Label>
+                    <Label Text="{Binding Luong, StringFormat='+ {0:#,##0.###}  VNĐ'}" TextColor="Green" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="End"></Label>
+
+                    
+                    <Label Text="Trả nợ: " Grid.Column="0" Grid.Row="2"></Label>
+                    <Label Text="{Binding TraNo, StringFormat='- {0:#,##0.###}  VNĐ'}" TextColor="Red" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" HorizontalOptions="End"></Label>
+
+                    <Label Text="Còn lại: " Grid.Column="0" Grid.Row="3"></Label>
+                    <Label Text="{Binding ConLai, StringFormat='+ {0:#,##0.###}  VNĐ'}" Grid.Column="1" Grid.Row="3"></Label>
+                    <Label Text="{Binding DaSuDung, StringFormat='- {0:#,##0.###}  VNĐ'}" Grid.Column="2" Grid.Row="3"></Label>
+
+                    <Label Text="Ăn uống: " Grid.Column="0" Grid.Row="4"></Label>
+                    <Label Text="{Binding AnUong, StringFormat='+ {0:#,##0.###}  VNĐ'}" Grid.Column="1" Grid.Row="4"></Label>
+                    <Label Text="{Binding DaAnUong, StringFormat='- {0:#,##0.###}  VNĐ'}" Grid.Column="2" Grid.Row="4"></Label>
+
+                    <Label Text="Tiết kiệm: " Grid.Column="0" Grid.Row="5"></Label>
+                    <Label Text="{Binding TietKiem, StringFormat='+ {0:#,##0.###}  VNĐ'}" Grid.Column="1" Grid.Row="5"></Label>
+                    <Label Text="{Binding DaTietKiem, StringFormat='- {0:#,##0.###}  VNĐ'}" Grid.Column="2" Grid.Row="5"></Label>
+
+                    <Label Text="Mua sắm: " Grid.Column="0" Grid.Row="6"></Label>
+                    <Label Text="{Binding MuaSam, StringFormat='+ {0:#,##0.###}  VNĐ'}" Grid.Column="1" Grid.Row="6"></Label>
+                    <Label Text="{Binding DaMuaSam, StringFormat='- {0:#,##0.###}  VNĐ'}" Grid.Column="2" Grid.Row="6"></Label>
+
+                    <Label Text="Du lịch: " Grid.Column="0" Grid.Row="7"></Label>
+                    <Label Text="{Binding DuLich, StringFormat='+ {0:#,##0.###}  VNĐ'}" Grid.Column="1" Grid.Row="7"></Label>
+                    <Label Text="{Binding DaDuLich, StringFormat='- {0:#,##0.###}  VNĐ'}" Grid.Column="2" Grid.Row="7"></Label>
+
+                    <Label Text="Đầu tư: " Grid.Column="0" Grid.Row="8"></Label>
+                    <Label Text="{Binding DauTu, StringFormat='+ {0:#,##0.###}  VNĐ'}" Grid.Column="1" Grid.Row="8"></Label>
+                    <Label Text="{Binding DaDauTu, StringFormat='- {0:#,##0.###}  VNĐ'}" Grid.Column="2" Grid.Row="8"></Label>
                 </Grid>
             </StackLayout>
         </ScrollView>

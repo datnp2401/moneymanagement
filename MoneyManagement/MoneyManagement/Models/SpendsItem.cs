@@ -14,11 +14,11 @@ namespace MoneyManagement.Models
             set { SetProperty<int>(ref _Id, value, () => OnPropertyChanged(nameof(Id))); }
         }
 
-        private double _Amount;
-        public double Amount
+        private decimal _Amount;
+        public decimal Amount
         {
             get => _Amount;
-            set { SetProperty<double>(ref _Amount, value, () => OnPropertyChanged(nameof(Amount))); }
+            set { SetProperty<decimal>(ref _Amount, value, () => OnPropertyChanged(nameof(Amount))); }
         }
 
         private string _Content;

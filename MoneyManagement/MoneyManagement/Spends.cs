@@ -13,7 +13,7 @@ namespace MoneyManagement
         [MaxLength(200)]
         public string Content { get; set; }
 
-        public double Amount { get; set; }
+        public decimal Amount { get; set; }
 
         [MaxLength(200)]
         public string Address { get; set; }
