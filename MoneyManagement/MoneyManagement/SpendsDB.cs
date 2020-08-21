@@ -53,10 +53,5 @@ namespace MoneyManagement
             }
 
         }
-
-        public void Dispose()
-        {
-            _databaseConnection.Dispose();
-        }
     }
 }

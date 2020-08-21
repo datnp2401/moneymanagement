@@ -1,4 +1,6 @@
-﻿using System;
+using Syncfusion.SfNumericTextBox.XForms.iOS;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,7 +24,9 @@ namespace MoneyManagement.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            global::Xamarin.Forms.Forms.Init();
+global::Xamarin.Forms.Forms.Init();
+SfNumericTextBoxRenderer.Init();
+
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

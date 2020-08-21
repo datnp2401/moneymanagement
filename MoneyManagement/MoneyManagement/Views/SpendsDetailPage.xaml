@@ -1,14 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:syncfusion="clr-namespace:Syncfusion.SfNumericTextBox.XForms;assembly=Syncfusion.SfNumericTextBox.XForms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:util="clr-namespace:MoneyManagement"
              x:Class="MoneyManagement.Views.SpendsDetailPage"
+             xmlns:BaseControls="clr-namespace:MoneyManagement.CustomControls"
              Title="Thông tin chi tiết">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Sửa" Clicked="EditItem_Clicked" />
     </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <util:ConverterNumber x:Key="currencyConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <StackLayout Spacing="20" Padding="7">
         <Grid>
             <Grid.RowDefinitions>
@@ -32,13 +40,18 @@
             </Picker>
 
             <Label Text="Mô tả: " FontSize="Small" VerticalOptions="Center" TextColor="Black" Grid.Column="0" Grid.Row="2" />
-            <Editor Text="{Binding SpendsItem.Content}" d:Text="Item name" FontSize="Small" Grid.Column="1" Grid.Row="2"/>
+            <Editor Text="{Binding SpendsItem.Content}" FontSize="Small" Grid.Column="1" Grid.Row="2"/>
 
             <Label Text="Số tiền: " FontSize="Small" VerticalOptions="Center" TextColor="Black" Grid.Column="0" Grid.Row="3" />
-            <Entry Text="{Binding SpendsItem.Amount}" d:Text="Item name" FontSize="Small" Grid.Column="1" Grid.Row="3"/>
+            <!--<BaseControls:NumbericInput Text="{Binding SpendsItem.Amount, StringFormat='{0:#,###,###,###}'}" AllowFraction="True" AllowNegative="True" Keyboard="Numeric" FontSize="Small" Grid.Column="1" Grid.Row="3">
+
+            </BaseControls:NumbericInput>-->
+
+            <syncfusion:SfNumericTextBox x:Name="syncfusionAmount" Value="{Binding SpendsItem.Amount}" FormatString="n" ParserMode="Decimal" MaximumNumberDecimalDigits="0" FontSize="Small" Grid.Column="1" Grid.Row="3"/>
+
 
             <Label Text="Địa chỉ: " FontSize="Small" VerticalOptions="Center" TextColor="Black" Grid.Column="0" Grid.Row="4" />
-            <Entry Text="{Binding SpendsItem.Address}" d:Text="Item name" FontSize="Small" Grid.Column="1" Grid.Row="4"/>
+            <Entry Text="{Binding SpendsItem.Address}" FontSize="Small" Grid.Column="1" Grid.Row="4"/>
 
             <Label Text="Ngày: " FontSize="Small" VerticalOptions="Center" TextColor="Black" Grid.Column="0" Grid.Row="5" />
             <DatePicker Date="{Binding SpendsItem.DateNo}" MinimumDate="01/01/2018" Format="dd/MM/yyyy" FontSize="Small" Grid.Column="1" Grid.Row="5" />

@@ -52,8 +52,6 @@ namespace MoneyManagement.ViewModels
                 SpendsItemList.Add(spendsItem);
             }
 
-            SpendsDB.Dispose();
-
             MessagingCenter.Subscribe<NewSpendsPage, SpendsItem>(this, "EditItem", async (obj, item) =>
             {
                 IsBusy = true;
@@ -95,7 +93,8 @@ namespace MoneyManagement.ViewModels
             {
                 SpendsItemList.Clear();
                 var items = await SpendsDataStore.GetItemsAsync(true);
-                foreach (var item in items)
+                List<SpendsItem> itemList = items.OrderByDescending(x => x.Id).ToList();
+                foreach (var item in itemList)
                 {
                     SpendsItemList.Add(item);
                 }

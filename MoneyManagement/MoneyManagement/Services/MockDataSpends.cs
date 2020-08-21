@@ -33,7 +33,7 @@ namespace MoneyManagement.Services
 
                 items.Add(spendsItem);
             }
-            SpendsDB.Dispose();
+
             items = items.OrderByDescending(x => x.Id).ToList();
         }
 

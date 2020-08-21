@@ -6,6 +6,7 @@
             mc:Ignorable="d"
             xmlns:views="clr-namespace:MoneyManagement.Views"
             xmlns:viewsTotalSpend="clr-namespace:MoneyManagement.Views.TotalSpend"
+            xmlns:viewsTotalAllSpend="clr-namespace:MoneyManagement.Views.TotalAllMoney"
             x:Class="MoneyManagement.Views.MainPage"
             BarBackgroundColor="PaleTurquoise"
             >
@@ -20,6 +21,12 @@
         <NavigationPage IconImageSource="MoneyTotal.png" >
             <x:Arguments>
                 <viewsTotalSpend:TotalPage />
+            </x:Arguments>
+        </NavigationPage>
+
+        <NavigationPage IconImageSource="TotalAllMoney.png" >
+            <x:Arguments>
+                <viewsTotalAllSpend:TotalAllMoneyPage />
             </x:Arguments>
         </NavigationPage>
 

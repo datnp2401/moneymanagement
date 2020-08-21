@@ -27,6 +27,7 @@ namespace MoneyManagement.Droid
 
             var path = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), dbName);
 
+
             return new SQLiteConnection(path);
 
         }

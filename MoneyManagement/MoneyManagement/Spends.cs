@@ -1,13 +1,11 @@
 ﻿using SQLite;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MoneyManagement
 {
     public class Spends
     {
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey, AutoIncrement()]
         public int Id { get; set; }
 
         [MaxLength(200)]

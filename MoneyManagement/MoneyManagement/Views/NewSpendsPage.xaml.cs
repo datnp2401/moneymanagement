@@ -33,6 +33,8 @@ namespace MoneyManagement.Views
         public NewSpendsPage()
         {
             InitializeComponent();
+
+
             //BindingContext = _NewSpendsViewModel = new NewSpendsViewModel();
 
             SpendType = new ObservableCollection<string>()
@@ -50,6 +52,7 @@ namespace MoneyManagement.Views
             SpendsItem.TextColor = "Red";
 
             BindingContext = this;
+            syncfusionAmount.Culture = new System.Globalization.CultureInfo("vi-VN");
 
         }
 
@@ -61,9 +64,28 @@ namespace MoneyManagement.Views
             spends.SpendType = ChooseSpendType;
             spends.Content = SpendsItem.Content;
             spends.Address = SpendsItem.Address;
-            spends.Amount = SpendsItem.Amount;
+
             spends.DateNo = SpendsItem.DateNo;
             spends.TextColor = SpendsItem.TextColor;
+
+            if (IsSpend.IsToggled)
+            {
+                txtSpend = "Thu";
+                lbSpend.Text = "Thu";
+                lbSpend.TextColor = Color.Green;
+                SpendsItem.TextColor = "Green";
+                SpendsItem.Amount = Math.Abs(SpendsItem.Amount);
+            }
+            else
+            {
+                txtSpend = "Chi";
+                lbSpend.Text = "Chi";
+                lbSpend.TextColor = Color.Red;
+                SpendsItem.TextColor = "Red";
+                SpendsItem.Amount = 0 - SpendsItem.Amount;
+            }
+
+            spends.Amount = SpendsItem.Amount;
 
             string mess = SpendsDB.AddUser(spends);
 
@@ -85,6 +107,7 @@ namespace MoneyManagement.Views
                 lbSpend.Text = "Thu";
                 lbSpend.TextColor = Color.Green;
                 SpendsItem.TextColor = "Green";
+                SpendsItem.Amount = Math.Abs(SpendsItem.Amount);
             }
             else
             {
@@ -92,6 +115,7 @@ namespace MoneyManagement.Views
                 lbSpend.Text = "Chi";
                 lbSpend.TextColor = Color.Red;
                 SpendsItem.TextColor = "Red";
+                SpendsItem.Amount = 0 - SpendsItem.Amount;
             }
         }
 

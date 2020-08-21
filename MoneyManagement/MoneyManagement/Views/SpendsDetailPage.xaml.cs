@@ -40,6 +40,17 @@ namespace MoneyManagement.Views
 
             this.SpendsItem = spendsItem;
 
+            if (this.SpendsItem.Amount < 0)
+            {
+                this.SpendsItem.Amount = -this.SpendsItem.Amount;
+                IsSpend.IsToggled = false;
+            }
+            else
+            {
+                IsSpend.IsToggled = true;
+            }
+
+
             this.SpendType = new ObservableCollection<string>()
             {
                 "Ăn uống",
@@ -64,6 +75,8 @@ namespace MoneyManagement.Views
             ChooseSpendType = SpendsItem.SpendType;
 
             BindingContext = this;
+
+            syncfusionAmount.Culture = new System.Globalization.CultureInfo("vi-VN");
         }
 
         async void EditItem_Clicked(object sender, EventArgs e)
@@ -75,9 +88,27 @@ namespace MoneyManagement.Views
             spends.SpendType = ChooseSpendType;
             spends.Content = SpendsItem.Content;
             spends.Address = SpendsItem.Address;
-            spends.Amount = SpendsItem.Amount;
+
             spends.DateNo = SpendsItem.DateNo;
             spends.TextColor = SpendsItem.TextColor;
+
+            if (IsSpend.IsToggled)
+            {
+                txtSpend = "Thu";
+                lbSpend.Text = "Thu";
+                lbSpend.TextColor = Color.Green;
+                SpendsItem.TextColor = "Green";
+                SpendsItem.Amount = Math.Abs(SpendsItem.Amount);
+            }
+            else
+            {
+                txtSpend = "Chi";
+                lbSpend.Text = "Chi";
+                lbSpend.TextColor = Color.Red;
+                SpendsItem.TextColor = "Red";
+                SpendsItem.Amount = 0 - SpendsItem.Amount;
+            }
+            spends.Amount = SpendsItem.Amount;
 
             SpendsDB.updateUser(spends);
 
@@ -94,6 +125,7 @@ namespace MoneyManagement.Views
                 lbSpend.Text = "Thu";
                 lbSpend.TextColor = Color.Green;
                 SpendsItem.TextColor = "Green";
+                SpendsItem.Amount = Math.Abs(SpendsItem.Amount);
             }
             else
             {
@@ -101,6 +133,7 @@ namespace MoneyManagement.Views
                 lbSpend.Text = "Chi";
                 lbSpend.TextColor = Color.Red;
                 SpendsItem.TextColor = "Red";
+                SpendsItem.Amount = 0 - SpendsItem.Amount;
             }
         }
     }
