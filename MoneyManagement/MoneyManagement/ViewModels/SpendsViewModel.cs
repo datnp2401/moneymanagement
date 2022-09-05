@@ -1,4 +1,5 @@
 ﻿using MoneyManagement.Models;
+using MoneyManagement.Services;
 using MoneyManagement.Views;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace MoneyManagement.ViewModels
         public Command LoadItemsCommand { get; set; }
 
         public SpendsDB SpendsDB;
+        public SettingsDB SettingsDB;
         public SpendsItem SpendsItem { get; set; } = new SpendsItem();
 
         public string Address { get; set; }
@@ -35,6 +37,7 @@ namespace MoneyManagement.ViewModels
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
             SpendsDB = new SpendsDB();
+
             List<Spends> lst = SpendsDB.GetSpends().OrderByDescending(x => x.Id).ToList();
 
             for (int i = 0; i < lst.Count(); i++)
@@ -72,12 +75,10 @@ namespace MoneyManagement.ViewModels
 
             MessagingCenter.Subscribe<NewSpendsPage, SpendsItem>(this, "AddItem", async (obj, item) =>
             {
-                IsBusy = true;
-
                 var newItem = item as SpendsItem;
-                //SpendsItemList.Add(newItem);
+                SpendsItemList.Insert(0, newItem);
                 await SpendsDataStore.AddItemAsync(newItem);
-
+                IsBusy = true;
                 IsBusy = false;
             });
 
@@ -92,8 +93,10 @@ namespace MoneyManagement.ViewModels
             try
             {
                 SpendsItemList.Clear();
+
                 var items = await SpendsDataStore.GetItemsAsync(true);
-                List<SpendsItem> itemList = items.OrderByDescending(x => x.Id).ToList();
+                List<SpendsItem> itemList = items.Where(x => x.Id > 0).OrderByDescending(x => x.Id).ToList();
+
                 foreach (var item in itemList)
                 {
                     SpendsItemList.Add(item);

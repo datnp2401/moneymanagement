@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:syncfusion="clr-namespace:Syncfusion.SfNumericTextBox.XForms;assembly=Syncfusion.SfNumericTextBox.XForms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoneyManagement.Views.Setting.NewSettingPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Hủy" Clicked="Cancel_Clicked"/>
+        <ToolbarItem Text="Lưu"  Command="{Binding AddItemsCommand}" Clicked="Save_Clicked" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout Spacing="20" Padding="7">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25*">
+                    </ColumnDefinition>
+                    <ColumnDefinition Width="75*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label Text="Mã: " FontSize="Small" VerticalOptions="Center" TextColor="Black" Grid.Column="0" Grid.Row="1" />
+                <Editor Text="{Binding SettingsItem.Code}"  FontSize="Small" Grid.Column="1" Grid.Row="1"/>
+
+
+
+                <Label Text="Tên: " FontSize="Small" VerticalOptions="Center" TextColor="Black" Grid.Column="0" Grid.Row="2" />
+                <Editor Text="{Binding SettingsItem.Name}"  FontSize="Small" Grid.Column="1" Grid.Row="2"/>
+
+                <Label Text="Phần trăm: " FontSize="Small" VerticalOptions="Center" TextColor="Black" Grid.Column="0" Grid.Row="3" />
+
+                <syncfusion:SfNumericTextBox x:Name="syncfusionPercent" Value="{Binding SettingsItem.Percent}" FormatString="n" ParserMode="Decimal" MaximumNumberDecimalDigits="0" FontSize="Small" Grid.Column="1" Grid.Row="3"/>
+
+                <Label Text="Tab: " FontSize="Small" VerticalOptions="Center" TextColor="Black" Grid.Column="0" Grid.Row="4" />
+                <Picker x:Name="picker" FontSize="Small" ItemsSource="{Binding SettingType}"  SelectedItem="{Binding ChooseSettingType}" SelectedIndex="{Binding ChooseSettingIndex}" Title="Loại" TitleColor="Black" Grid.Column="1" Grid.Row="4">
+                </Picker>
+
+
+            </Grid>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace MoneyManagement.Services
 {
-    public class SpendsData: IDataStore<Spends>
+    public class SpendsData : IDataStore<Spends>
     {
         readonly List<Spends> items;
 
         public SpendsData()
         {
-            //items = new List<Spends>()
+            items = new List<Spends>();
             //{
             //    new Spends { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
             //    new Spends { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is an item description." },

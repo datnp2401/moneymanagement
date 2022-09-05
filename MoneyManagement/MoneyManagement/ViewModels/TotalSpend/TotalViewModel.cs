@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -14,15 +15,18 @@ namespace MoneyManagement.ViewModels.TotalSpend
 
         public string CurrentDate { get; set; } = "Tổng Thu - Chi tháng " + DateTime.Now.ToString("MM/yyyy");
 
+        public string Date { get; set; } = DateTime.Now.ToString("MM/yyyy");
         /// <summary>
         /// Nợ: 
         /// VPBank: 3.670 tr/tháng
         /// TPBank: 2.814 tr/tháng
         /// FE Credit: 2.287 tr/tháng
-        /// Tổng NH: 8.800 tr/tháng
+        /// Shinhan: 1.200 tr/tháng
+        /// Tổng NH: 10 tr/tháng
         /// Tư: 25tr trả  2tr/tháng tới tháng 7
         /// Ruby: 30 trả 1.5 triệu/tháng
-        ///Tổng cộng nợ tháng: 12tr3/tháng
+        /// 
+        /// Tổng cộng nợ tháng: 13tr5/tháng
         /// </summary>
         public decimal No { get; set; }
 
@@ -99,24 +103,25 @@ namespace MoneyManagement.ViewModels.TotalSpend
             }
         }
 
-        public void OnChangeAll()
+        async void OnChangeAll()
         {
-            Luong = SpendsDB.GetSpends().Where(x => x.SpendType.Equals("Lương")).Where(x => x.DateNo.Month == DateTime.Now.Month).OrderByDescending(x => x.Id).ToList().Sum(x => x.Amount);
+            var DateTimeNew = DateTime.Parse(Date);
+
+            Luong = SpendsDB.GetSpends().Where(x => x.SpendType.Equals("Lương")).Where(x => x.DateNo.Month == DateTimeNew.Month).OrderByDescending(x => x.Id).ToList().Sum(x => x.Amount);
             //ConLai = Luong - No;
 
-            /// Trả nợ 65.5%
-            /// Ăn uống 19%
-            /// Tiết kiệm 15%
-            /// Du lịch 3.5%
-            /// Đầu tư 3.5%
-            /// Mua sắm 3.5%
+            /// Ăn uống 20%
+            /// Tiết kiệm 10%
+            /// Du lịch 10%
+            /// Đầu tư 40%
+            /// Mua sắm 20%
 
-            TraNo = Math.Round(Luong * (decimal)0.655, 2);
-            AnUong = Math.Round(Luong * (decimal)0.19, 2);
-            TietKiem = Math.Round(Luong * (decimal)0.15, 2);
-            DuLich = Math.Round(Luong * (decimal)0.035, 2);
-            DauTu = Math.Round(Luong * (decimal)0.035, 2);
-            MuaSam = Math.Round(Luong * (decimal)0.035, 2);
+            TraNo = Math.Round(Luong * (decimal)0.7, 2);
+            AnUong = Math.Round(Luong * (decimal)0.14, 2);
+            TietKiem = Math.Round(Luong * (decimal)0.1, 2);
+            DuLich = Math.Round(Luong * (decimal)0.03, 2);
+            DauTu = Math.Round(Luong * (decimal)0.0, 2);
+            MuaSam = Math.Round(Luong * (decimal)0.03, 2);
 
             DaAnUong = Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == DateTime.Now.Month).Where(x => x.SpendType != null ? x.SpendType.Equals("Ăn uống") : false).ToList().Sum(x => x.Amount), 2);
             DaDuLich = Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == DateTime.Now.Month).Where(x => x.SpendType != null ? x.SpendType.Equals("Du lịch") : false).ToList().Sum(x => x.Amount), 2);
@@ -209,6 +214,7 @@ namespace MoneyManagement.ViewModels.TotalSpend
 
             base.OnPropertyChanged(nameof(Luong));
             base.OnPropertyChanged(nameof(ConLai));
+            base.OnPropertyChanged(nameof(TongConLai));
 
             base.OnPropertyChanged(nameof(AnUong));
             base.OnPropertyChanged(nameof(DuLich));
@@ -216,6 +222,12 @@ namespace MoneyManagement.ViewModels.TotalSpend
             base.OnPropertyChanged(nameof(DauTu));
             base.OnPropertyChanged(nameof(MuaSam));
             base.OnPropertyChanged(nameof(TraNo));
+
+            base.OnPropertyChanged(nameof(AnUongConLai));
+            base.OnPropertyChanged(nameof(DuLichConLai));
+            base.OnPropertyChanged(nameof(TietKiemConLai));
+            base.OnPropertyChanged(nameof(DauTuConLai));
+            base.OnPropertyChanged(nameof(MuaSamConLai));
             base.OnPropertyChanged(nameof(TraNoConLai));
 
             base.OnPropertyChanged(nameof(DaAnUong));

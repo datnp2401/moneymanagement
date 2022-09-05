@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-xmlns:syncfusion="clr-namespace:Syncfusion.SfNumericTextBox.XForms;assembly=Syncfusion.SfNumericTextBox.XForms"
+             xmlns:syncfusion="clr-namespace:Syncfusion.SfNumericTextBox.XForms;assembly=Syncfusion.SfNumericTextBox.XForms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -33,7 +33,7 @@ xmlns:syncfusion="clr-namespace:Syncfusion.SfNumericTextBox.XForms;assembly=Sync
                 <ColumnDefinition Width="75*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Label x:Name="lbSpend" Text="{Binding txtSpend, Mode=TwoWay}" FontSize="Small" VerticalOptions="Center" TextColor="Red" Grid.Column="0" Grid.Row="0" />
-            <Switch x:Name="IsSpend" Toggled="IsSpend_Toggled" IsToggled="{Binding IsCheckSpend}"  Grid.Column="1" Grid.Row="0"></Switch>
+            <Switch x:Name="IsSpend" Toggled="IsSpend_Toggled" Grid.Column="1" Grid.Row="0"></Switch>
 
             <Label Text="Thu - Chi: " FontSize="Small" VerticalOptions="Center" TextColor="Black" Grid.Column="0" Grid.Row="1" />
             <Picker x:Name="picker" FontSize="Small" ItemsSource="{Binding SpendType}"  SelectedItem="{Binding ChooseSpendType}" SelectedIndex="{Binding ChooseSpendIndex}" Title="Loại thu - chi" TitleColor="Black" Grid.Column="1" Grid.Row="1">

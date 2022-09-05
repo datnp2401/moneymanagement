@@ -1,0 +1,64 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:BaseControls="clr-namespace:MoneyManagement.CustomControls"
+             x:Class="MoneyManagement.Views.Setting.SettingPage"            
+             Title="Cài đặt"            
+             >
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Thêm" Clicked="AddItem_Clicked" />
+    </ContentPage.ToolbarItems>
+
+    <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}"  Command="{Binding LoadItemsCommand}">
+        <BaseControls:CustomListView ItemsSource="{Binding SettingsItemList}" HasUnevenRows="true" SeparatorVisibility="None">
+            <BaseControls:CustomListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="7,3">
+                            <Grid >
+                                <Grid.RowDefinitions>
+
+                                    <RowDefinition Height="*"></RowDefinition>
+
+                                    <RowDefinition Height="*"></RowDefinition>
+
+                                    <RowDefinition Height="*"></RowDefinition>
+
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+
+                                    <ColumnDefinition Width="15*"></ColumnDefinition>
+
+                                    <ColumnDefinition Width="70*"></ColumnDefinition>
+
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="Mã" FontSize="Small" FontAttributes="Bold" TextColor="Black" Grid.Column="0" Grid.Row="0" />
+                                <Label Text="{Binding Code}" FontSize="Small" FontAttributes="Bold" TextColor="Black" Grid.Column="1" Grid.Row="0" />
+
+                                <Label Text="Tên" FontSize="Small" TextColor="Black" Grid.Column="0" Grid.Row="1"/>
+                                <Label Text="{Binding Name}" FontSize="Small" TextColor="Black" Grid.Column="1" Grid.Row="1"/>
+
+                                <Label Text="Danh mục" FontAttributes="Bold" FontSize="Small" TextColor="Blue"  Grid.Column="0" Grid.Row="2"/>
+                                <Label Text="{Binding Tab}" FontAttributes="Bold" FontSize="Small" TextColor="Blue" Grid.Column="1" Grid.Row="2"/>
+
+                                <Label Text="Phần trăm" FontAttributes="Bold" FontSize="Small" TextColor="Red" Grid.Column="0" Grid.Row="3" />
+                                <Label Text="{Binding Percent, StringFormat='{0:#,##0.###} %'}" TextColor="Red" FontAttributes="Bold" FontSize="Small" Grid.Column="1" Grid.Row="3" />
+
+                                <Grid.GestureRecognizers>
+
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected"></TapGestureRecognizer>
+
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </BaseControls:CustomListView.ItemTemplate>
+        </BaseControls:CustomListView>
+
+    </RefreshView>
+</ContentPage>

@@ -30,6 +30,7 @@ namespace MoneyManagement.Services
                 spendsItem.Amount = lst[i].Amount;
                 spendsItem.SpendType = lst[i].SpendType;
                 spendsItem.TextColor = lst[i].TextColor;
+                spendsItem.Tab = lst[i].Tab;
 
                 items.Add(spendsItem);
             }
@@ -39,7 +40,11 @@ namespace MoneyManagement.Services
 
         public async Task<bool> AddItemAsync(SpendsItem item)
         {
-            items.Add(item);
+            if (items.FindIndex(x => x.Id == item.Id) == -1)
+            {
+                items.Add(item);
+            }
+
 
             return await Task.FromResult(true);
         }

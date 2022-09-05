@@ -42,6 +42,13 @@ namespace MoneyManagement.Models
             set { SetProperty<string>(ref _SpendType, value, () => OnPropertyChanged(nameof(SpendType))); }
         }
 
+        private string _Tab;
+        public string Tab
+        {
+            get => _Tab;
+            set { SetProperty<string>(ref _Tab, value, () => OnPropertyChanged(nameof(Tab))); }
+        }
+
         private DateTime _DateNo = DateTime.Now;
         public DateTime DateNo
         {

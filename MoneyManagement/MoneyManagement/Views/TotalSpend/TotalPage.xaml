@@ -10,6 +10,9 @@
         <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}"  Command="{Binding LoadItemsCommand}">
             <ScrollView>
                 <StackLayout Padding="5,3">
+
+                    <DatePicker x:Name="startDatePicker" Date="{Binding Date, Mode=TwoWay}" Format="dd/MM/yyyy" MinimumDate="01/01/1990"></DatePicker>
+                    <!--<Label Text="tédsàdt &#x0a; \\n sđàtewsd &#x0a;s fádfsdfádf" />-->
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"></RowDefinition>
@@ -26,6 +29,9 @@
                             <ColumnDefinition Width="35*"></ColumnDefinition>
                             <ColumnDefinition Width="35*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
+
+
+
                         <Label Text="{Binding CurrentDate}" TextColor="Red" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"></Label>
 
                         <Label Text="Vốn: " Grid.Column="0" Grid.Row="1" TextColor="Black"></Label>
@@ -35,8 +41,8 @@
                         <!--<Label Text="Trả nợ: " Grid.Column="0" Grid.Row="2" TextColor="Black"></Label>
                         <Label Text="{Binding No, StringFormat='{0:#,##0.#} VNĐ'}" TextColor="Red" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" HorizontalOptions="End"></Label>-->
 
-                        
-                        <Label Text="Ăn uống (19%): " Grid.Column="0" Grid.Row="4" TextColor="Black"></Label>
+
+                        <Label Text="Ăn uống (19%):" Grid.Column="0" Grid.Row="4" TextColor="Black"></Label>
                         <Label Text="{Binding AnUong, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="1" Grid.Row="4" TextColor="Green" HorizontalOptions="End"></Label>
                         <Label Text="{Binding DaAnUong, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="2" Grid.Row="4" TextColor="Red" HorizontalOptions="End"></Label>
 

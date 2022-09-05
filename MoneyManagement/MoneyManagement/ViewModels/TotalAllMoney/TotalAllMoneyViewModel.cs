@@ -91,24 +91,24 @@ namespace MoneyManagement.ViewModels.TotalAllMoney
 
         public void OnChangeAll()
         {
-            Luong = SpendsDB.GetSpends().Where(x => x.SpendType.Equals("Lương")).OrderByDescending(x => x.Id).ToList().Sum(x => x.Amount);
-            No = SpendsDB.GetSpends().Where(x => x.SpendType.Equals("Trả nợ")).OrderByDescending(x => x.Id).ToList().Sum(x => x.Amount);
-            ConLai = Luong - No;
+            Luong = SpendsDB.GetSpends().Where(x => x.SpendType.Equals("Lương")).Where(x => x.DateNo.Month == DateTime.Now.Month).OrderByDescending(x => x.Id).ToList().Sum(x => x.Amount);
+            //No = SpendsDB.GetSpends().Where(x => x.SpendType.Equals("Trả nợ")).OrderByDescending(x => x.Id).ToList().Sum(x => x.Amount);
+            //ConLai = Luong - No;
 
             /// ConLai, tính % lúc chưa dùng tiền
-            /// Ăn uống 35%
-            /// Du lịch 10%
-            /// Tiết kiệm 12.5%
-            /// Đầu tư 5%
-            /// Trả nợ 60%
-            /// Mua sắm 7.5%
+            /// Trả nợ 65.5%
+            /// Ăn uống 19%
+            /// Tiết kiệm 15%
+            /// Du lịch 3.5%
+            /// Đầu tư 3.5%
+            /// Mua sắm 3.5%
 
-            AnUong = Math.Round(ConLai * (decimal)0.35, 2);
-            DuLich = Math.Round(ConLai * (decimal)0.1, 2);
-            TietKiem = Math.Round(ConLai * (decimal)0.125, 2);
-            DauTu = Math.Round(ConLai * (decimal)0.05, 2);
-            TraNo = Math.Round(ConLai * (decimal)0.15, 2);
-            MuaSam = Math.Round(ConLai * (decimal)0.075, 2);
+            TraNo = Math.Round(Luong * (decimal)0.655, 2);
+            AnUong = Math.Round(Luong * (decimal)0.19, 2);
+            TietKiem = Math.Round(Luong * (decimal)0.15, 2);
+            DuLich = Math.Round(Luong * (decimal)0.035, 2);
+            DauTu = Math.Round(Luong * (decimal)0.035, 2);
+            MuaSam = Math.Round(Luong * (decimal)0.035, 2);
 
             DaAnUong = Math.Round(SpendsDB.GetSpends().Where(x => x.SpendType != null ? x.SpendType.Equals("Ăn uống") : false).ToList().Sum(x => x.Amount), 2);
             DaDuLich = Math.Round(SpendsDB.GetSpends().Where(x => x.SpendType != null ? x.SpendType.Equals("Du lịch") : false).ToList().Sum(x => x.Amount), 2);
@@ -119,13 +119,13 @@ namespace MoneyManagement.ViewModels.TotalAllMoney
 
             DaSuDung = DaAnUong + DaDuLich + DaTietKiem + DaDauTu + DaMuaSam;
 
-            TongConLai = ConLai + DaSuDung;
+            TongConLai = Luong + DaSuDung;
             AnUongConLai = AnUong + DaAnUong;
             DuLichConLai = DuLich + DaDuLich;
             TietKiemConLai = TietKiem + DaTietKiem;
             DauTuConLai = DauTu + DaDauTu;
             MuaSamConLai = MuaSam + DaMuaSam;
-            TraNoConLai = TraNoDaDung;
+            TraNoConLai = TraNo + TraNoDaDung;
 
             if (TongConLai > 0)
             {
@@ -201,6 +201,7 @@ namespace MoneyManagement.ViewModels.TotalAllMoney
 
             base.OnPropertyChanged(nameof(Luong));
             base.OnPropertyChanged(nameof(ConLai));
+            base.OnPropertyChanged(nameof(TongConLai));
             base.OnPropertyChanged(nameof(No));
 
             base.OnPropertyChanged(nameof(AnUong));
@@ -209,6 +210,13 @@ namespace MoneyManagement.ViewModels.TotalAllMoney
             base.OnPropertyChanged(nameof(DauTu));
             base.OnPropertyChanged(nameof(MuaSam));
             base.OnPropertyChanged(nameof(TraNo));
+
+            base.OnPropertyChanged(nameof(TraNoConLai));
+            base.OnPropertyChanged(nameof(AnUongConLai));
+            base.OnPropertyChanged(nameof(DuLichConLai));
+            base.OnPropertyChanged(nameof(TietKiemConLai));
+            base.OnPropertyChanged(nameof(DauTuConLai));
+            base.OnPropertyChanged(nameof(MuaSamConLai));
             base.OnPropertyChanged(nameof(TraNoConLai));
 
             base.OnPropertyChanged(nameof(DaAnUong));

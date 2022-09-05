@@ -20,6 +20,5 @@ namespace MoneyManagement.Views.TotalSpend
             InitializeComponent();
             BindingContext = TotalViewModel = new TotalViewModel();
         }
-
     }
 }

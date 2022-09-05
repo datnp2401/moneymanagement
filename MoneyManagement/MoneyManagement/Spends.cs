@@ -17,7 +17,8 @@ namespace MoneyManagement
         public string Address { get; set; }
 
         public DateTime DateNo { get; set; } = DateTime.Now;
-        public string SpendType { get; set; } // Ăn uống, Du lịch, Tiết kiệm, Trả nợ, Đầu tư, Mua sắm, Lương
+        public string SpendType { get; set; } // Chi tiêu, Tiết kiệm, Đầu tư, Lương
         public string TextColor { get; set; }
+        public string Tab { get; set; }
     }
 }

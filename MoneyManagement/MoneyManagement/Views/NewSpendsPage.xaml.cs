@@ -1,10 +1,12 @@
 ﻿using MoneyManagement.Models;
 using MoneyManagement.ViewModels;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +29,7 @@ namespace MoneyManagement.Views
         public int ChooseSpendIndex { get; set; } = 0;
 
         public SpendsDB SpendsDB = new SpendsDB();
+        public SettingsDB SettingsDB = new SettingsDB();
 
         public bool IsCheckSpend { get; set; } = false;
 
@@ -37,17 +40,16 @@ namespace MoneyManagement.Views
 
             //BindingContext = _NewSpendsViewModel = new NewSpendsViewModel();
 
-            SpendType = new ObservableCollection<string>()
+            List<Settings> lstSetting = SettingsDB.GetSettings().OrderBy(x => x.Tab).ToList();
+
+            SpendType = new ObservableCollection<string>();
+
+            foreach (var item in lstSetting)
             {
-                "Ăn uống",
-                "Du lịch",
-                "Trả nợ",
-                "Tiết kiệm",
-                "Đầu tư",
-                "Mua sắm",
-                "Lương"
-            };
-            ChooseSpendType = "Ăn uống";
+                SpendType.Add(item.Name);
+            }
+
+            ChooseSpendType = "Chi tiêu";
             txtSpend = "Chi";
             SpendsItem.TextColor = "Red";
 
@@ -59,6 +61,7 @@ namespace MoneyManagement.Views
         async void Save_Clicked(object sender, EventArgs e)
         {
             SpendsItem.SpendType = ChooseSpendType;
+
 
             Spends spends = new Spends();
             spends.SpendType = ChooseSpendType;
@@ -87,7 +90,9 @@ namespace MoneyManagement.Views
 
             spends.Amount = SpendsItem.Amount;
 
-            string mess = SpendsDB.AddUser(spends);
+            SpendsDB.AddUser(spends);
+
+            SpendsItem.Id = SpendsDB.GetSpends().Count;
 
             MessagingCenter.Send(this, "AddItem", SpendsItem);
             await Navigation.PopModalAsync();

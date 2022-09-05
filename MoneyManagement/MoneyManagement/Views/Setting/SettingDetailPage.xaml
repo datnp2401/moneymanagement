@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:syncfusion="clr-namespace:Syncfusion.SfNumericTextBox.XForms;assembly=Syncfusion.SfNumericTextBox.XForms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoneyManagement.Views.Setting.SettingDetailPage"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:BaseControls="clr-namespace:MoneyManagement.CustomControls"
+             Title="Thông tin chi tiết">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Sửa" Clicked="EditItem_Clicked" />
+    </ContentPage.ToolbarItems>
+    <StackLayout Spacing="20" Padding="7">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*">
+                </ColumnDefinition>
+                <ColumnDefinition Width="75*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Text="Mã: " FontSize="Small" VerticalOptions="Center" TextColor="Black" Grid.Column="0" Grid.Row="0" />
+            <Editor Text="{Binding SettingsItem.Code}" FontSize="Small" Grid.Column="1" Grid.Row="0"/>
+
+            <Label Text="Tên: " FontSize="Small" VerticalOptions="Center" TextColor="Black" Grid.Column="0" Grid.Row="1" />
+            <Entry Text="{Binding SettingsItem.Name}" FontSize="Small" Grid.Column="1" Grid.Row="1"/>
+
+            <Label Text="Danh mục: " FontSize="Small" FontAttributes="Bold" VerticalOptions="Center" TextColor="Blue" Grid.Column="0" Grid.Row="2" />
+            <Picker x:Name="picker" FontSize="Small" FontAttributes="Bold" ItemsSource="{Binding SettingType}"  TextColor="Blue" SelectedItem="{Binding ChooseSettingType}" SelectedIndex="{Binding ChooseSettingIndex}" Title="Loại" TitleColor="Black" Grid.Column="1" Grid.Row="2">
+            </Picker>
+
+            <Label Text="Phần trăm: " FontSize="Small" VerticalOptions="Center" FontAttributes="Bold"  TextColor="Red" Grid.Column="0" Grid.Row="3" />
+            <syncfusion:SfNumericTextBox x:Name="syncfusionAmount" Value="{Binding SettingsItem.Percent}" FormatString="n" FontAttributes="Bold" TextColor="Red" ParserMode="Decimal" MaximumNumberDecimalDigits="0" FontSize="Small" Grid.Column="1" Grid.Row="3"/>
+
+            
+        </Grid>
+
+    </StackLayout>
+</ContentPage>

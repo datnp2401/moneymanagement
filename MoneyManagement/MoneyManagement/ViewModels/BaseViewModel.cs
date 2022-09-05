@@ -14,6 +14,7 @@ namespace MoneyManagement.ViewModels
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
         public IDataStore<SpendsItem> SpendsDataStore => DependencyService.Get<IDataStore<SpendsItem>>();
+        public IDataStore<SettingsItem> SettingsDataStore => DependencyService.Get<IDataStore<SettingsItem>>();
 
         bool isBusy = false;
         public bool IsBusy

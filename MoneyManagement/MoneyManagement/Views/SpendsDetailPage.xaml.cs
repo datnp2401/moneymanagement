@@ -25,24 +25,27 @@ namespace MoneyManagement.Views
         public string ChooseSpendType { get; set; }
 
         public SpendsDB SpendsDB = new SpendsDB();
+        public SettingsDB SettingsDB = new SettingsDB();
 
         public string txtSpend { get; set; }
 
-        public SpendsDetailPage(SpendsDetailViewModel spendsViewModel)
-        {
-            InitializeComponent();
-            BindingContext = this.SpendsDetailViewModel = spendsViewModel;
-        }
+        //public SpendsDetailPage(SpendsDetailViewModel spendsViewModel)
+        //{
+        //    InitializeComponent();
+        //    BindingContext = this.SpendsDetailViewModel = spendsViewModel;
+        //}
 
         public SpendsDetailPage(SpendsItem spendsItem)
         {
             InitializeComponent();
 
+            //checkUpdateItem = true;
+
             this.SpendsItem = spendsItem;
 
             if (this.SpendsItem.Amount < 0)
             {
-                this.SpendsItem.Amount = -this.SpendsItem.Amount;
+                //this.SpendsItem.Amount = this.SpendsItem.Amount;
                 IsSpend.IsToggled = false;
             }
             else
@@ -51,19 +54,17 @@ namespace MoneyManagement.Views
             }
 
 
-            this.SpendType = new ObservableCollection<string>()
+            List<Settings> lstSetting = SettingsDB.GetSettings().OrderBy(x => x.Tab).ToList();
+
+            SpendType = new ObservableCollection<string>();
+
+            foreach (var item in lstSetting)
             {
-                "Ăn uống",
-                "Du lịch",
-                "Trả nợ",
-                "Tiết kiệm",
-                "Đầu tư",
-                "Mua sắm",
-                "Lương"
-            };
+                SpendType.Add(item.Name);
+            }
 
             txtSpend = "Chi";
-            SpendsItem.TextColor = "Red";
+            //SpendsItem.TextColor = "Red";
 
             for (int i = 0; i < SpendType.Count; i++)
             {
@@ -106,8 +107,10 @@ namespace MoneyManagement.Views
                 lbSpend.Text = "Chi";
                 lbSpend.TextColor = Color.Red;
                 SpendsItem.TextColor = "Red";
-                SpendsItem.Amount = 0 - SpendsItem.Amount;
+                SpendsItem.Amount = Math.Abs(SpendsItem.Amount);
+                SpendsItem.Amount = -SpendsItem.Amount;
             }
+
             spends.Amount = SpendsItem.Amount;
 
             SpendsDB.updateUser(spends);
@@ -119,22 +122,23 @@ namespace MoneyManagement.Views
         private void IsSpend_Toggled(object sender, ToggledEventArgs e)
         {
             Switch check = (Switch)sender;
-            if (check.IsToggled)
-            {
-                txtSpend = "Thu";
-                lbSpend.Text = "Thu";
-                lbSpend.TextColor = Color.Green;
-                SpendsItem.TextColor = "Green";
-                SpendsItem.Amount = Math.Abs(SpendsItem.Amount);
-            }
-            else
-            {
-                txtSpend = "Chi";
-                lbSpend.Text = "Chi";
-                lbSpend.TextColor = Color.Red;
-                SpendsItem.TextColor = "Red";
-                SpendsItem.Amount = 0 - SpendsItem.Amount;
-            }
+            //if (check.IsToggled)
+            //{
+            //    txtSpend = "Thu";
+            //    lbSpend.Text = "Thu";
+            //    lbSpend.TextColor = Color.Green;
+            //    SpendsItem.TextColor = "Green";
+            //    SpendsItem.Amount = Math.Abs(SpendsItem.Amount);
+            //}
+            //else
+            //{
+            //    txtSpend = "Chi";
+            //    lbSpend.Text = "Chi";
+            //    lbSpend.TextColor = Color.Red;
+            //    SpendsItem.TextColor = "Red";
+            //    SpendsItem.Amount = Math.Abs(SpendsItem.Amount);
+            //    SpendsItem.Amount = -SpendsItem.Amount;
+            //}
         }
     }
 }

@@ -7,6 +7,7 @@
             xmlns:views="clr-namespace:MoneyManagement.Views"
             xmlns:viewsTotalSpend="clr-namespace:MoneyManagement.Views.TotalSpend"
             xmlns:viewsTotalAllSpend="clr-namespace:MoneyManagement.Views.TotalAllMoney"
+            xmlns:viewsSettings="clr-namespace:MoneyManagement.Views.Setting"
             x:Class="MoneyManagement.Views.MainPage"
             BarBackgroundColor="PaleTurquoise"
             >
@@ -56,7 +57,7 @@
 
         <NavigationPage IconImageSource="Setting.png" >
             <x:Arguments>
-                <views:AboutPage />
+                <viewsSettings:SettingPage />
             </x:Arguments>
         </NavigationPage>
 

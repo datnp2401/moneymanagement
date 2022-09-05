@@ -23,7 +23,7 @@ namespace MoneyManagement.Droid
 
         {
 
-            var dbName = "ProductsDB.db3";
+            var dbName = "Products1.db3";
 
             var path = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), dbName);
 
