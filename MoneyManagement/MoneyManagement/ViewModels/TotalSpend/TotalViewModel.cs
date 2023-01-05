@@ -16,6 +16,9 @@ namespace MoneyManagement.ViewModels.TotalSpend
         public string CurrentDate { get; set; } = "Tổng Thu - Chi tháng " + DateTime.Now.ToString("MM/yyyy");
 
         public string Date { get; set; } = DateTime.Now.ToString("MM/yyyy");
+
+        public string Title { get; set; } = "Tổng Tháng";
+
         /// <summary>
         /// Nợ: 
         /// VPBank: 3.670 tr/tháng
@@ -117,13 +120,16 @@ namespace MoneyManagement.ViewModels.TotalSpend
             /// Mua sắm 20%
 
             TraNo = Math.Round(Luong * (decimal)0.7, 2);
-            AnUong = Math.Round(Luong * (decimal)0.14, 2);
+
+            var data = SpendsDB.GetSpends().Where(x => x.DateNo.Month == DateTime.Now.Month);
+
+            AnUong = Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == DateTime.Now.Month).Where(x => x.Tab != null ? x.Tab.Equals("Chi tiêu") : false).ToList().Sum(x => x.Amount), 2);
             TietKiem = Math.Round(Luong * (decimal)0.1, 2);
             DuLich = Math.Round(Luong * (decimal)0.03, 2);
             DauTu = Math.Round(Luong * (decimal)0.0, 2);
             MuaSam = Math.Round(Luong * (decimal)0.03, 2);
 
-            DaAnUong = Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == DateTime.Now.Month).Where(x => x.SpendType != null ? x.SpendType.Equals("Ăn uống") : false).ToList().Sum(x => x.Amount), 2);
+            DaAnUong = Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == DateTime.Now.Month).Where(x => x.SpendType != null ? x.SpendType.Equals("Chi tiêu") : false).ToList().Sum(x => x.Amount), 2);
             DaDuLich = Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == DateTime.Now.Month).Where(x => x.SpendType != null ? x.SpendType.Equals("Du lịch") : false).ToList().Sum(x => x.Amount), 2);
             DaTietKiem = Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == DateTime.Now.Month).Where(x => x.SpendType != null ? x.SpendType.Equals("Tiết kiệm") : false).ToList().Sum(x => x.Amount), 2);
             DaDauTu = Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == DateTime.Now.Month).Where(x => x.SpendType != null ? x.SpendType.Equals("Đầu tư") : false).ToList().Sum(x => x.Amount), 2);

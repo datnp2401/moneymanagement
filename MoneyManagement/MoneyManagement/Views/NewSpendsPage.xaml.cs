@@ -20,13 +20,13 @@ namespace MoneyManagement.Views
     public partial class NewSpendsPage : ContentPage
     {
         public SpendsItem SpendsItem { get; set; } = new SpendsItem();
-        public ObservableCollection<string> SpendType { get; set; }
+        public ObservableCollection<Settings> SpendType { get; set; }
 
-        public string ChooseSpendType { get; set; }
+        public Settings ChooseSpendType { get; set; }
 
         public string txtSpend { get; set; }
 
-        public int ChooseSpendIndex { get; set; } = 0;
+        public int ChooseSpendIndex { get; set; } = 3;
 
         public SpendsDB SpendsDB = new SpendsDB();
         public SettingsDB SettingsDB = new SettingsDB();
@@ -42,14 +42,15 @@ namespace MoneyManagement.Views
 
             List<Settings> lstSetting = SettingsDB.GetSettings().OrderBy(x => x.Tab).ToList();
 
-            SpendType = new ObservableCollection<string>();
+            SpendType = new ObservableCollection<Settings>();
 
             foreach (var item in lstSetting)
             {
-                SpendType.Add(item.Name + " 一【" + item.Tab + "】");
+                //SpendType.Add(item.Name + " 一【" + item.Tab + "】");
+                SpendType.Add(item);
             }
 
-            ChooseSpendType = "Chi tiêu";
+            ChooseSpendType = SpendType.First();
             txtSpend = "Chi";
             SpendsItem.TextColor = "Red";
 
@@ -60,11 +61,13 @@ namespace MoneyManagement.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            SpendsItem.SpendType = ChooseSpendType;
+            SpendsItem.SpendType = ChooseSpendType.Name;
 
 
             Spends spends = new Spends();
-            spends.SpendType = ChooseSpendType;
+            spends.SpendType = ChooseSpendType.Name;
+            spends.SpendTypeCode = ChooseSpendType.Code;
+            spends.Tab = ChooseSpendType.Tab;
             spends.Content = SpendsItem.Content;
             spends.Address = SpendsItem.Address;
 

@@ -18,6 +18,7 @@ namespace MoneyManagement
 
         public DateTime DateNo { get; set; } = DateTime.Now;
         public string SpendType { get; set; } // Chi tiêu, Tiết kiệm, Đầu tư, Lương
+        public string SpendTypeCode { get; set; } // Chi tiêu, Tiết kiệm, Đầu tư, Lương
         public string TextColor { get; set; }
         public string Tab { get; set; }
     }

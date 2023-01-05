@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="MoneyManagement.Views.TotalSpend.TotalPage"
-             BackgroundColor="#d6e9e9">
+             BackgroundColor="#d6e9e9"
+             Title="{Binding Title}">
     <ContentPage.Content>
         <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}"  Command="{Binding LoadItemsCommand}">
             <ScrollView>
@@ -46,7 +47,7 @@
                         <Label Text="{Binding AnUong, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="1" Grid.Row="4" TextColor="Green" HorizontalOptions="End"></Label>
                         <Label Text="{Binding DaAnUong, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="2" Grid.Row="4" TextColor="Red" HorizontalOptions="End"></Label>
 
-                        <Label Text="Tiết kiệm (15%): " Grid.Column="0" Grid.Row="5" TextColor="Black"></Label>
+                        <!--<Label Text="Tiết kiệm (15%): " Grid.Column="0" Grid.Row="5" TextColor="Black"></Label>
                         <Label Text="{Binding TietKiem, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="1" Grid.Row="5" TextColor="Green" HorizontalOptions="End"></Label>
                         <Label Text="{Binding DaTietKiem, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="2" Grid.Row="5" TextColor="Red" HorizontalOptions="End"></Label>
 
@@ -64,14 +65,14 @@
 
                         <Label Text="Trả nợ (65.5%): " Grid.Column="0" Grid.Row="9" TextColor="Black"></Label>
                         <Label Text="{Binding TraNo, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="1" Grid.Row="9" TextColor="Green" HorizontalOptions="End"></Label>
-                        <Label Text="{Binding TraNoDaDung, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="2" Grid.Row="9" TextColor="Red" HorizontalOptions="End"></Label>
+                        <Label Text="{Binding TraNoDaDung, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="2" Grid.Row="9" TextColor="Red" HorizontalOptions="End"></Label>-->
 
                         <Label Text="=========================================" Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="3" HorizontalOptions="Center"></Label>
                         <!-- Số tiền còn lại -->
                         <Label Text="Tổng còn lại: " Grid.Column="1" Grid.Row="11" TextColor="Red" HorizontalOptions="End"></Label>
                         <Label Text="{Binding TongConLai, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="2" Grid.Row="11" TextColor="{Binding ColorTongConLai}" HorizontalOptions="End"></Label>
 
-                        <Label Text="Ăn uống còn lại: " Grid.Column="1" Grid.Row="12" HorizontalOptions="End" TextColor="Black"></Label>
+                        <!--<Label Text="Ăn uống còn lại: " Grid.Column="1" Grid.Row="12" HorizontalOptions="End" TextColor="Black"></Label>
                         <Label Text="{Binding AnUongConLai, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="2" Grid.Row="12" TextColor="{Binding ColorAnUongConLai}" HorizontalOptions="End"></Label>
 
                         <Label Text="Tiết kiệm còn lại: " Grid.Column="1" Grid.Row="13" HorizontalOptions="End" TextColor="Black"></Label>
@@ -87,7 +88,8 @@
                         <Label Text="{Binding DauTuConLai, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="2" Grid.Row="16" TextColor="{Binding ColorDauTuConLai}" HorizontalOptions="End"></Label>
 
                         <Label Text="Trả nợ còn lại: " Grid.Column="1" Grid.Row="17" HorizontalOptions="End" TextColor="Black"></Label>
-                        <Label Text="{Binding TraNoConLai, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="2" Grid.Row="17" TextColor="{Binding ColorTraNoConLai}" HorizontalOptions="End"></Label>
+                        <Label Text="{Binding TraNoConLai, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="2" Grid.Row="17" TextColor="{Binding ColorTraNoConLai}" HorizontalOptions="End"></Label>-->
+                    
                     </Grid>
                 </StackLayout>
             </ScrollView>
