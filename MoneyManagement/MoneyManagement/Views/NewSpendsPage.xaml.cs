@@ -46,7 +46,7 @@ namespace MoneyManagement.Views
 
             foreach (var item in lstSetting)
             {
-                SpendType.Add(item.Name);
+                SpendType.Add(item.Name + " 一【" + item.Tab + "】");
             }
 
             ChooseSpendType = "Chi tiêu";

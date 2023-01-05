@@ -26,6 +26,11 @@ namespace MoneyManagement
 
         public SpendsDB SpendsDB;
         public SpendsItem SpendsItem { get; set; } = new SpendsItem();
+
+        public SettingsItem SettingsItem { get; set; } = new SettingsItem();
+
+        public SettingsDB SettingsDB = new SettingsDB();
+
         public App()
         {
             InitializeComponent();
@@ -42,7 +47,19 @@ namespace MoneyManagement
         protected override void OnStart()
         {
 
+            //SettingsDB.AddSetting(settings);
 
+            SettingsItem.Id = SettingsDB.GetSettings().Count;
+
+            ObservableCollection<Settings> SettingsData = MenuData.CreateData();
+
+            if (SettingsItem.Id == 0)
+            {
+                foreach (var item in SettingsData)
+                {
+                    SettingsDB.AddSetting(item);
+                }
+            }
 
             //SpendsDB = new SpendsDB();
             //List<Spends> lst = SpendsDB.GetSpends().OrderByDescending(x => x.Id).ToList();
