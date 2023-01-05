@@ -22,7 +22,7 @@ namespace MoneyManagement.Services
 
             settings = new Settings();
             settings.Tab = "Chi tiêu";
-            settings.Code = "Chitieucanthiet";
+            settings.Code = "Chi tiêu cần thiết";
             settings.Name = "Chi tiêu cần thiết";
 
             settings.Percent = 60;
@@ -30,7 +30,7 @@ namespace MoneyManagement.Services
 
             settings = new Settings();
             settings.Tab = "Chi tiêu";
-            settings.Code = "Chitieukhongcanthiet";
+            settings.Code = "Chi tiêu không cần thiết";
             settings.Name = "Chi tiêu không cần thiết";
 
             settings.Percent = 20;
@@ -38,7 +38,7 @@ namespace MoneyManagement.Services
 
             settings = new Settings();
             settings.Tab = "Chi tiêu";
-            settings.Code = "Quy";
+            settings.Code = "Quỹ";
             settings.Name = "Quỹ";
 
             settings.Percent = 20;
