@@ -36,31 +36,31 @@
                         <Label Text="Vốn: " Grid.Column="0" Grid.Row="1" TextColor="Black"></Label>
                         <Label Text="{Binding Luong, StringFormat='{0:#,##0.#} VNĐ'}" TextColor="Green" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="End"></Label>
 
-                        <Label Text="{Binding ChiTieu}" Grid.Column="0" Grid.Row="2" TextColor="Black"></Label>
-                        <Label Text="{Binding ThuChiTieu}" Grid.Column="1" Grid.Row="2" TextColor="Green" HorizontalOptions="End"></Label>
-                        <Label Text="{Binding DaChiTieu}" Grid.Column="2" Grid.Row="2" TextColor="Red" HorizontalOptions="End"></Label>
+                        <Label Text="{Binding ChiTieu}" Grid.Column="0" Grid.Row="2" TextColor="Black" HorizontalTextAlignment="Start"></Label>
+                        <Label Text="{Binding ThuChiTieu}" Grid.Column="1" Grid.Row="2" TextColor="Green" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
+                        <Label Text="{Binding DaChiTieu}" Grid.Column="2" Grid.Row="2" TextColor="Red" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
 
-                        <Label Text="{Binding TietKiem}" Grid.Column="0" Grid.Row="3" TextColor="Black"></Label>
-                        <Label Text="{Binding ThuTietKiem}" Grid.Column="1" Grid.Row="3" TextColor="Green" HorizontalOptions="End"></Label>
-                        <Label Text="{Binding DaTietKiem}" Grid.Column="2" Grid.Row="3" TextColor="Red" HorizontalOptions="End"></Label>
+                        <Label Text="{Binding TietKiem}" Grid.Column="0" Grid.Row="3" TextColor="Black" HorizontalTextAlignment="Start"></Label>
+                        <Label Text="{Binding ThuTietKiem}" Grid.Column="1" Grid.Row="3" TextColor="Green" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
+                        <Label Text="{Binding DaTietKiem}" Grid.Column="2" Grid.Row="3" TextColor="Red" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
 
-                        <Label Text="{Binding DauTu}" Grid.Column="0" Grid.Row="4" TextColor="Black"></Label>
-                        <Label Text="{Binding ThuDauTu}" Grid.Column="1" Grid.Row="4" TextColor="Green" HorizontalOptions="End"></Label>
-                        <Label Text="{Binding DaDauTu}" Grid.Column="2" Grid.Row="4" TextColor="Red" HorizontalOptions="End"></Label>
+                        <Label Text="{Binding DauTu}" Grid.Column="0" Grid.Row="4" TextColor="Black" HorizontalTextAlignment="Start"></Label>
+                        <Label Text="{Binding ThuDauTu}" Grid.Column="1" Grid.Row="4" TextColor="Green" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
+                        <Label Text="{Binding DaDauTu}" Grid.Column="2" Grid.Row="4" TextColor="Red" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
 
                         <Label Text="=========================================" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="3" HorizontalOptions="Center"></Label>
                         <!-- Số tiền còn lại -->
                         <Label Text="Tổng còn lại: " Grid.Column="1" Grid.Row="7" TextColor="Red" HorizontalOptions="End"></Label>
-                        <Label Text="{Binding TongConLai, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="2" Grid.Row="7" TextColor="{Binding ColorTongConLai}" HorizontalOptions="End"></Label>
+                        <Label Text="{Binding TongConLai, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="2" Grid.Row="7" TextColor="{Binding ColorTongConLai}" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
 
                         <Label Text="Ăn uống còn lại: " Grid.Column="1" Grid.Row="8" HorizontalOptions="End" TextColor="Black"></Label>
-                        <Label Text="{Binding ChiTieuConLai, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="2" Grid.Row="8" TextColor="{Binding ColorChiTieuConLai}" HorizontalOptions="End"></Label>
+                        <Label Text="{Binding ChiTieuConLai, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="2" Grid.Row="8" TextColor="{Binding ColorChiTieuConLai}" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
 
                         <Label Text="Tiết kiệm còn lại: " Grid.Column="1" Grid.Row="9" HorizontalOptions="End" TextColor="Black"></Label>
-                        <Label Text="{Binding TietKiemConLai, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="2" Grid.Row="9" TextColor="{Binding ColorTietKiemConLai}" HorizontalOptions="End"></Label>
+                        <Label Text="{Binding TietKiemConLai, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="2" Grid.Row="9" TextColor="{Binding ColorTietKiemConLai}" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
 
                         <Label Text="Đầu tư còn lại: " Grid.Column="1" Grid.Row="10" HorizontalOptions="End" TextColor="Black"></Label>
-                        <Label Text="{Binding DauTuConLai, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="2" Grid.Row="10" TextColor="{Binding ColorDauTuConLai}" HorizontalOptions="End"></Label>
+                        <Label Text="{Binding DauTuConLai, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="2" Grid.Row="10" TextColor="{Binding ColorDauTuConLai}" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
 
                     </Grid>
                 </StackLayout>

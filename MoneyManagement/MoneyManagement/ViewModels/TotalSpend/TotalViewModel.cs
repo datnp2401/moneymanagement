@@ -138,6 +138,8 @@ namespace MoneyManagement.ViewModels.TotalSpend
             ThuTietKiem = "";
             ThuDauTu = "";
             DaChiTieu = "";
+            DaTietKiem = "";
+            DaDauTu = "";
 
             foreach (var itemSetting in lstSetting)
             {
@@ -149,10 +151,12 @@ namespace MoneyManagement.ViewModels.TotalSpend
                 else if (itemSetting.Tab.Equals("Tiết kiệm"))
                 {
                     ThuTietKiem += "\n" + (amountTietKiem * itemSetting.Percent / 100).ToString("#,##0.#") + " VNĐ";
+                    DaTietKiem += "\n" + Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == DateTimeNew.Month).Where(x => x.Tab != null ? x.SpendTypeCode.Equals(itemSetting.Code) : false).ToList().Sum(x => x.Amount), 2).ToString("#,##0.#") + " VNĐ";
                 }
                 else if (itemSetting.Tab.Equals("Đầu tư"))
                 {
                     ThuDauTu += "\n" + (amountDauTu * itemSetting.Percent / 100).ToString("#,##0.#") + " VNĐ";
+                    DaDauTu += "\n" + Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == DateTimeNew.Month).Where(x => x.Tab != null ? x.SpendTypeCode.Equals(itemSetting.Code) : false).ToList().Sum(x => x.Amount), 2).ToString("#,##0.#") + " VNĐ";
                 }
             }
 
