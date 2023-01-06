@@ -22,6 +22,7 @@ namespace MoneyManagement.ViewModels
         public SettingsDB SettingsDB;
         public SpendsItem SpendsItem { get; set; } = new SpendsItem();
 
+        public string Date { get; set; } = DateTime.Now.ToString("MM/yyyy");
         public string Address { get; set; }
         public string Content { get; set; }
         public double Amount { get; set; }
@@ -37,8 +38,9 @@ namespace MoneyManagement.ViewModels
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
             SpendsDB = new SpendsDB();
+            var DateTimeNew = DateTime.Parse(Date);
 
-            List<Spends> lst = SpendsDB.GetSpends().OrderByDescending(x => x.Id).ToList();
+            List<Spends> lst = SpendsDB.GetSpends().Where(x => x.DateNo.Month == DateTimeNew.Month).OrderByDescending(x => x.Id).ToList();
 
             for (int i = 0; i < lst.Count(); i++)
             {
@@ -93,9 +95,11 @@ namespace MoneyManagement.ViewModels
             try
             {
                 SpendsItemList.Clear();
+                var DateTimeNew = DateTime.Parse(Date);
 
                 var items = await SpendsDataStore.GetItemsAsync(true);
-                List<SpendsItem> itemList = items.Where(x => x.Id > 0).OrderByDescending(x => x.Id).ToList();
+
+                List<SpendsItem> itemList = items.Where(x => x.Id > 0 && x.DateNo.Month == DateTimeNew.Month).OrderByDescending(x => x.Id).ToList();
 
                 foreach (var item in itemList)
                 {

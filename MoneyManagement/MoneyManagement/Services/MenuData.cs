@@ -12,6 +12,15 @@ namespace MoneyManagement.Services
             ObservableCollection<Settings> data = new ObservableCollection<Settings>();
 
             Settings settings = new Settings();
+
+            settings.Tab = "Lương";
+            settings.Code = "Lương";
+            settings.Name = "Lương 一【" + settings.Tab + "】";
+
+            settings.Percent = 100;
+            data.Add(settings);
+
+            settings = new Settings();
             settings.Tab = "";
             settings.Code = "Chi tiêu";
             settings.Name = "Chi tiêu 一【" + settings.Tab + "】";
@@ -25,7 +34,7 @@ namespace MoneyManagement.Services
             settings.Code = "Cần thiết";
             settings.Name = "Cần thiết 一【" + settings.Tab + "】";
 
-            settings.Percent = 60;
+            settings.Percent = 70;
             data.Add(settings);
 
             settings = new Settings();
@@ -33,16 +42,16 @@ namespace MoneyManagement.Services
             settings.Code = "Không cần thiết";
             settings.Name = "Không cần thiết 一【" + settings.Tab + "】";
 
-            settings.Percent = 20;
+            settings.Percent = 30;
             data.Add(settings);
 
-            settings = new Settings();
-            settings.Tab = "Chi tiêu";
-            settings.Code = "Quỹ";
-            settings.Name = "Quỹ 一【" + settings.Tab + "】";
+            //settings = new Settings();
+            //settings.Tab = "Chi tiêu";
+            //settings.Code = "Quỹ";
+            //settings.Name = "Quỹ 一【" + settings.Tab + "】";
 
-            settings.Percent = 20;
-            data.Add(settings);
+            //settings.Percent = 20;
+            //data.Add(settings);
 
             settings = new Settings();
             settings.Tab = "";
@@ -81,7 +90,7 @@ namespace MoneyManagement.Services
             settings.Code = "Quỹ";
             settings.Name = "Quỹ 一【" + settings.Tab + "】";
 
-            settings.Percent = 40;
+            settings.Percent = 30;
             data.Add(settings);
 
             settings = new Settings();
@@ -98,6 +107,14 @@ namespace MoneyManagement.Services
             settings.Name = "Forex 一【" + settings.Tab + "】";
 
             settings.Percent = 30;
+            data.Add(settings);
+
+            settings = new Settings();
+            settings.Tab = "Đầu tư";
+            settings.Code = "Từ thiện";
+            settings.Name = "Từ thiện 一【" + settings.Tab + "】";
+
+            settings.Percent = 10;
             data.Add(settings);
 
             return data;
