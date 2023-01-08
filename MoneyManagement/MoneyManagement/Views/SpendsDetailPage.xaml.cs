@@ -63,7 +63,23 @@ namespace MoneyManagement.Views
                 SpendType.Add(item.Name);
             }
 
-            txtSpend = "Chi";
+            if (spendsItem != null && string.IsNullOrEmpty(spendsItem.TextColor))
+            {
+                txtSpend = "Chi";
+            }
+            else if (spendsItem != null && !string.IsNullOrEmpty(spendsItem.TextColor))
+            {
+                if (spendsItem.TextColor.Equals("Green"))
+                {
+                    txtSpend = "Thu";
+                }
+                else
+                {
+                    txtSpend = "Chi";
+                }
+
+            }
+
             //SpendsItem.TextColor = "Red";
 
             for (int i = 0; i < SpendType.Count; i++)
@@ -122,23 +138,23 @@ namespace MoneyManagement.Views
         private void IsSpend_Toggled(object sender, ToggledEventArgs e)
         {
             Switch check = (Switch)sender;
-            //if (check.IsToggled)
-            //{
-            //    txtSpend = "Thu";
-            //    lbSpend.Text = "Thu";
-            //    lbSpend.TextColor = Color.Green;
-            //    SpendsItem.TextColor = "Green";
-            //    SpendsItem.Amount = Math.Abs(SpendsItem.Amount);
-            //}
-            //else
-            //{
-            //    txtSpend = "Chi";
-            //    lbSpend.Text = "Chi";
-            //    lbSpend.TextColor = Color.Red;
-            //    SpendsItem.TextColor = "Red";
-            //    SpendsItem.Amount = Math.Abs(SpendsItem.Amount);
-            //    SpendsItem.Amount = -SpendsItem.Amount;
-            //}
+            if (check.IsToggled)
+            {
+                txtSpend = "Thu";
+                lbSpend.Text = "Thu";
+                lbSpend.TextColor = Color.Green;
+                SpendsItem.TextColor = "Green";
+                SpendsItem.Amount = Math.Abs(SpendsItem.Amount);
+            }
+            else
+            {
+                txtSpend = "Chi";
+                lbSpend.Text = "Chi";
+                lbSpend.TextColor = Color.Red;
+                SpendsItem.TextColor = "Red";
+                SpendsItem.Amount = Math.Abs(SpendsItem.Amount);
+                SpendsItem.Amount = -SpendsItem.Amount;
+            }
         }
     }
 }

@@ -24,6 +24,11 @@
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="30*"></ColumnDefinition>
@@ -48,20 +53,28 @@
                         <Label Text="{Binding ThuDauTu}" Grid.Column="1" Grid.Row="4" TextColor="Green" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
                         <Label Text="{Binding DaDauTu}" Grid.Column="2" Grid.Row="4" TextColor="Red" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
 
+                        <Label Text="{Binding KinhDoanh}" Grid.Column="0" Grid.Row="5" TextColor="Black" HorizontalTextAlignment="Start"></Label>
+                        <Label Text="{Binding ThuKinhDoanh}" Grid.Column="1" Grid.Row="5" TextColor="Green" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
+                        <Label Text="{Binding DaKinhDoanh}" Grid.Column="2" Grid.Row="5" TextColor="Red" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
+                        
                         <Label Text="=========================================" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="3" HorizontalOptions="Center"></Label>
                         <!-- Số tiền còn lại -->
-                        <Label Text="Tổng còn lại: " Grid.Column="1" Grid.Row="7" TextColor="Red" HorizontalOptions="End"></Label>
-                        <Label Text="{Binding TongConLai, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="2" Grid.Row="7" TextColor="{Binding ColorTongConLai}" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
+                        <Label Text="Tổng còn lại: " Grid.Column="1" Grid.Row="7" TextColor="Red" HorizontalTextAlignment="Start"></Label>
+                        <Label Text="{Binding TongConLai, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="2" Grid.Row="7" TextColor="Black" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
 
-                        <Label Text="Ăn uống còn lại: " Grid.Column="1" Grid.Row="8" HorizontalOptions="End" TextColor="Black"></Label>
-                        <Label Text="{Binding ChiTieuConLai, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="2" Grid.Row="8" TextColor="{Binding ColorChiTieuConLai}" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
+                        <Label Text="{Binding ChiTieuConLai}" Grid.Column="1" Grid.Row="8"  TextColor="Black" HorizontalTextAlignment="Start"></Label>
+                        <Label Text="{Binding AmountChiTieuConLai}" Grid.Column="2" Grid.Row="8" TextColor="Black" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
 
-                        <Label Text="Tiết kiệm còn lại: " Grid.Column="1" Grid.Row="9" HorizontalOptions="End" TextColor="Black"></Label>
-                        <Label Text="{Binding TietKiemConLai, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="2" Grid.Row="9" TextColor="{Binding ColorTietKiemConLai}" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
+                        <Label Text="{Binding TietKiemConLai}" Grid.Column="1" Grid.Row="9" TextColor="Black" HorizontalTextAlignment="Start"></Label>
+                        <Label Text="{Binding AmountTietKiemConLai}" Grid.Column="2" Grid.Row="9" TextColor="Black" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
 
-                        <Label Text="Đầu tư còn lại: " Grid.Column="1" Grid.Row="10" HorizontalOptions="End" TextColor="Black"></Label>
-                        <Label Text="{Binding DauTuConLai, StringFormat='{0:#,##0.#} VNĐ'}" Grid.Column="2" Grid.Row="10" TextColor="{Binding ColorDauTuConLai}" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
+                        <Label Text="{Binding DauTuConLai}" Grid.Column="1" Grid.Row="10"  TextColor="Black" HorizontalTextAlignment="Start"></Label>
+                        <Label Text="{Binding AmountDauTuConLai}" Grid.Column="2" Grid.Row="10" TextColor="Black" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
 
+                        <Label Text="{Binding KinhDoanhConLai}" Grid.Column="1" Grid.Row="11" TextColor="Black" HorizontalTextAlignment="Start"></Label>
+                        <Label Text="{Binding AmountKinhDoanhConLai}" Grid.Column="2" Grid.Row="11" TextColor="Black" HorizontalOptions="End" HorizontalTextAlignment="End"></Label>
+
+                        
                     </Grid>
                 </StackLayout>
             </ScrollView>

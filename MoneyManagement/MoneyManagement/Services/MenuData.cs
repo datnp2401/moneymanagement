@@ -23,9 +23,9 @@ namespace MoneyManagement.Services
             settings = new Settings();
             settings.Tab = "";
             settings.Code = "Chi tiêu";
-            settings.Name = "Chi tiêu 一【" + settings.Tab + "】";
+            settings.Name = "Chi tiêu 一【Vốn】";
 
-            settings.Percent = 30;
+            settings.Percent = 50;
 
             data.Add(settings);
 
@@ -45,18 +45,10 @@ namespace MoneyManagement.Services
             settings.Percent = 30;
             data.Add(settings);
 
-            //settings = new Settings();
-            //settings.Tab = "Chi tiêu";
-            //settings.Code = "Quỹ";
-            //settings.Name = "Quỹ 一【" + settings.Tab + "】";
-
-            //settings.Percent = 20;
-            //data.Add(settings);
-
             settings = new Settings();
             settings.Tab = "";
             settings.Code = "Tiết kiệm";
-            settings.Name = "Tiết kiệm 一【" + settings.Tab + "】";
+            settings.Name = "Tiết kiệm 一【Vốn】";
 
             settings.Percent = 30;
             data.Add(settings);
@@ -80,9 +72,9 @@ namespace MoneyManagement.Services
             settings = new Settings();
             settings.Tab = "";
             settings.Code = "Đầu tư";
-            settings.Name = "Đầu tư 一【" + settings.Tab + "】";
+            settings.Name = "Đầu tư 一【Vốn】";
 
-            settings.Percent = 40;
+            settings.Percent = 20;
             data.Add(settings);
 
             settings = new Settings();
@@ -95,22 +87,62 @@ namespace MoneyManagement.Services
 
             settings = new Settings();
             settings.Tab = "Đầu tư";
-            settings.Code = "Dài hạn";
-            settings.Name = "Dài hạn 一【" + settings.Tab + "】";
+            settings.Code = "BĐS";
+            settings.Name = "BĐS 一【" + settings.Tab + "】";
+
+            settings.Percent = 20;
+            data.Add(settings);
+
+            settings = new Settings();
+            settings.Tab = "Đầu tư";
+            settings.Code = "Chứng khoán";
+            settings.Name = "Chứng khoán 一【" + settings.Tab + "】";
+
+            settings.Percent = 20;
+            data.Add(settings);
+
+            settings = new Settings();
+            settings.Tab = "Đầu tư";
+            settings.Code = "Crypto";
+            settings.Name = "Crypto 一【" + settings.Tab + "】";
 
             settings.Percent = 30;
             data.Add(settings);
 
             settings = new Settings();
-            settings.Tab = "Đầu tư";
+            settings.Tab = "";
+            settings.Code = "Kinh doanh";
+            settings.Name = "Kinh doanh 一【Vốn】";
+
+            settings.Percent = 100;
+            data.Add(settings);
+
+            settings = new Settings();
+            settings.Tab = "Kinh doanh";
+            settings.Code = "Quỹ";
+            settings.Name = "Quỹ 一【" + settings.Tab + "】";
+
+            settings.Percent = 30;
+            data.Add(settings);
+
+            settings = new Settings();
+            settings.Tab = "Kinh doanh";
             settings.Code = "Forex";
             settings.Name = "Forex 一【" + settings.Tab + "】";
 
-            settings.Percent = 30;
+            settings.Percent = 40;
             data.Add(settings);
 
             settings = new Settings();
-            settings.Tab = "Đầu tư";
+            settings.Tab = "Kinh doanh";
+            settings.Code = "Khác";
+            settings.Name = "Khác 一【" + settings.Tab + "】";
+
+            settings.Percent = 20;
+            data.Add(settings);
+
+            settings = new Settings();
+            settings.Tab = "Kinh doanh";
             settings.Code = "Từ thiện";
             settings.Name = "Từ thiện 一【" + settings.Tab + "】";
 

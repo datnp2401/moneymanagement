@@ -26,7 +26,7 @@ namespace MoneyManagement.Views
 
         public string txtSpend { get; set; }
 
-        public int ChooseSpendIndex { get; set; } = 3;
+        public int ChooseSpendIndex { get; set; } = 2;
 
         public SpendsDB SpendsDB = new SpendsDB();
         public SettingsDB SettingsDB = new SettingsDB();
@@ -40,7 +40,7 @@ namespace MoneyManagement.Views
 
             //BindingContext = _NewSpendsViewModel = new NewSpendsViewModel();
 
-            List<Settings> lstSetting = SettingsDB.GetSettings().OrderBy(x => x.Tab).ToList();
+            List<Settings> lstSetting = SettingsDB.GetSettings().OrderBy(x => x.Id).ToList();
 
             SpendType = new ObservableCollection<Settings>();
 
@@ -74,7 +74,7 @@ namespace MoneyManagement.Views
             spends.DateNo = SpendsItem.DateNo;
             spends.TextColor = SpendsItem.TextColor;
 
-            if (IsSpend.IsToggled)
+            if (SpendsItem.TextColor.Equals("Green"))
             {
                 txtSpend = "Thu";
                 lbSpend.Text = "Thu";
@@ -88,7 +88,7 @@ namespace MoneyManagement.Views
                 lbSpend.Text = "Chi";
                 lbSpend.TextColor = Color.Red;
                 SpendsItem.TextColor = "Red";
-                SpendsItem.Amount = 0 - SpendsItem.Amount;
+                SpendsItem.Amount = -1 * SpendsItem.Amount;
             }
 
             spends.Amount = SpendsItem.Amount;
@@ -123,9 +123,8 @@ namespace MoneyManagement.Views
                 lbSpend.Text = "Chi";
                 lbSpend.TextColor = Color.Red;
                 SpendsItem.TextColor = "Red";
-                SpendsItem.Amount = 0 - SpendsItem.Amount;
+                SpendsItem.Amount = -1 * SpendsItem.Amount;
             }
         }
-
     }
 }
