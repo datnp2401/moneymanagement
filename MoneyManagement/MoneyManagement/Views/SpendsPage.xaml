@@ -13,7 +13,7 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <DatePicker x:Name="startDatePicker" Date="{Binding Date, Mode=TwoWay}" Format="dd/MM/yyyy" MinimumDate="01/01/1990"></DatePicker>
+            <DatePicker x:Name="startDatePicker" Date="{Binding Date, Mode=TwoWay}" Format="MM/dd/yyyy" MinimumDate="01/01/1990"></DatePicker>
             <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}"  Command="{Binding LoadItemsCommand}">
                 <BaseControls:CustomListView x:Name="ItemsCollectionView" ItemsSource="{Binding SpendsItemList}" HasUnevenRows="true" SeparatorVisibility="None">
                     <BaseControls:CustomListView.ItemTemplate>

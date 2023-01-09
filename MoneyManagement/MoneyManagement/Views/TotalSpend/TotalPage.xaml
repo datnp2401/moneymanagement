@@ -12,7 +12,7 @@
             <ScrollView>
                 <StackLayout Padding="5,3">
 
-                    <DatePicker x:Name="startDatePicker" Date="{Binding Date, Mode=TwoWay}" Format="dd/MM/yyyy" MinimumDate="01/01/1990"></DatePicker>
+                    <DatePicker x:Name="startDatePicker" Date="{Binding Date, Mode=TwoWay}" Format="MM/dd/yyyy" MinimumDate="01/01/1990"></DatePicker>
                     <!--<Label Text="tédsàdt &#x0a; \\n sđàtewsd &#x0a;s fádfsdfádf" />-->
                     <Grid>
                         <Grid.RowDefinitions>

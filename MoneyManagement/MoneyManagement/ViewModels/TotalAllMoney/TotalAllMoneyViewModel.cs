@@ -11,58 +11,68 @@ namespace MoneyManagement.ViewModels.TotalAllMoney
     public class TotalAllMoneyViewModel : BaseViewModel
     {
         public Command LoadItemsCommand { get; set; }
+        public SettingsDB SettingsDB;
 
-        public string CurrentDate { get; set; }
+        public string CurrentDate { get; set; } = "Tổng Thu - Chi ";
 
-        public decimal No { get; set; }
+        public string Date { get; set; } = DateTime.Now.ToString("MM/yyyy");
+        public string Title { get; set; } = "Tổng";
 
         public decimal Luong { get; set; }
-        public decimal ConLai { get; set; }
+        public string ConLai { get; set; }
         public decimal TongConLai { get; set; }
         public decimal DaSuDung { get; set; }
         public string ColorDaSuDung { get; set; }
 
         /// <summary>
+        /// Title
+        /// </summary>
+        public string ChiTieu { get; set; }
+        public string TietKiem { get; set; }
+        public string DauTu { get; set; }
+        public string KinhDoanh { get; set; }
+
+        /// <summary>
         /// Chưa dùng
         /// </summary>
-        public decimal AnUong { get; set; }
-        public decimal TietKiem { get; set; }
-        public decimal MuaSam { get; set; }
-        public decimal DauTu { get; set; }
-        public decimal DuLich { get; set; }
-        public decimal TraNo { get; set; }
+        public string ThuChiTieu { get; set; }
+        public string ThuTietKiem { get; set; }
+        public string ThuDauTu { get; set; }
+        public string ThuKinhDoanh { get; set; }
 
         /// <summary>
         /// Đã dùng
         /// </summary>
-        public decimal DaAnUong { get; set; }
-        public decimal DaTietKiem { get; set; }
-        public decimal DaDuLich { get; set; }
-        public decimal DaDauTu { get; set; }
-        public decimal DaMuaSam { get; set; }
-        public decimal TraNoDaDung { get; set; }
+        public string DaChiTieu { get; set; }
+        public string DaTietKiem { get; set; }
+        public string DaDauTu { get; set; }
+        public string DaKinhDoanh { get; set; }
 
         /// <summary>
         /// Còn lại
         /// </summary>
-        public decimal AnUongConLai { get; set; }
-        public decimal TietKiemConLai { get; set; }
-        public decimal MuaSamConLai { get; set; }
-        public decimal DauTuConLai { get; set; }
-        public decimal DuLichConLai { get; set; }
-        public decimal TraNoConLai { get; set; }
+        public string ChiTieuConLai { get; set; }
+        public string TietKiemConLai { get; set; }
+        public string DauTuConLai { get; set; }
+        public string KinhDoanhConLai { get; set; }
+
+        public string AmountChiTieuConLai { get; set; }
+        public string AmountTietKiemConLai { get; set; }
+        public string AmountDauTuConLai { get; set; }
+        public string AmountKinhDoanhConLai { get; set; }
+
         public string ColorTongConLai { get; set; }
-        public string ColorAnUongConLai { get; set; }
+        public string ColorChiTieuConLai { get; set; }
         public string ColorTietKiemConLai { get; set; }
-        public string ColorMuaSamConLai { get; set; }
         public string ColorDauTuConLai { get; set; }
-        public string ColorDuLichConLai { get; set; }
-        public string ColorTraNoConLai { get; set; }
+        public string ColorKinhDoanhConLai { get; set; }
 
         public SpendsDB SpendsDB;
         public TotalAllMoneyViewModel()
         {
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            SettingsDB = new SettingsDB();
+
 
             SpendsDB = new SpendsDB();
 
@@ -91,142 +101,187 @@ namespace MoneyManagement.ViewModels.TotalAllMoney
 
         public void OnChangeAll()
         {
-            Luong = SpendsDB.GetSpends().Where(x => x.SpendType.Equals("Lương")).Where(x => x.DateNo.Month == DateTime.Now.Month).OrderByDescending(x => x.Id).ToList().Sum(x => x.Amount);
-            //No = SpendsDB.GetSpends().Where(x => x.SpendType.Equals("Trả nợ")).OrderByDescending(x => x.Id).ToList().Sum(x => x.Amount);
-            //ConLai = Luong - No;
+            //var DateTimeNew = DateTime.Parse(Date);
 
-            /// ConLai, tính % lúc chưa dùng tiền
-            /// Trả nợ 65.5%
-            /// Ăn uống 19%
-            /// Tiết kiệm 15%
-            /// Du lịch 3.5%
-            /// Đầu tư 3.5%
-            /// Mua sắm 3.5%
+            //CurrentDate = "Tổng Thu - Chi tháng " + DateTimeNew.ToString("MM/yyyy");
+            Luong = 0;
+            List<Settings> lstSetting = SettingsDB.GetSettings().OrderBy(x => x.Tab).ToList();
+            Luong = SpendsDB.GetSpends().Where(x => x.SpendTypeCode.Equals("Lương")).ToList().Sum(x => x.Amount);
 
-            TraNo = Math.Round(Luong * (decimal)0.655, 2);
-            AnUong = Math.Round(Luong * (decimal)0.19, 2);
-            TietKiem = Math.Round(Luong * (decimal)0.15, 2);
-            DuLich = Math.Round(Luong * (decimal)0.035, 2);
-            DauTu = Math.Round(Luong * (decimal)0.035, 2);
-            MuaSam = Math.Round(Luong * (decimal)0.035, 2);
 
-            DaAnUong = Math.Round(SpendsDB.GetSpends().Where(x => x.SpendType != null ? x.SpendType.Equals("Ăn uống") : false).ToList().Sum(x => x.Amount), 2);
-            DaDuLich = Math.Round(SpendsDB.GetSpends().Where(x => x.SpendType != null ? x.SpendType.Equals("Du lịch") : false).ToList().Sum(x => x.Amount), 2);
-            DaTietKiem = Math.Round(SpendsDB.GetSpends().Where(x => x.SpendType != null ? x.SpendType.Equals("Tiết kiệm") : false).ToList().Sum(x => x.Amount), 2);
-            DaDauTu = Math.Round(SpendsDB.GetSpends().Where(x => x.SpendType != null ? x.SpendType.Equals("Đầu tư") : false).ToList().Sum(x => x.Amount), 2);
-            DaMuaSam = Math.Round(SpendsDB.GetSpends().Where(x => x.SpendType != null ? x.SpendType.Equals("Mua sắm") : false).ToList().Sum(x => x.Amount), 2);
-            TraNoDaDung = Math.Round(SpendsDB.GetSpends().Where(x => x.SpendType != null ? x.SpendType.Equals("Trả nợ") : false).ToList().Sum(x => x.Amount), 2);
+            ChiTieu = "【Chi tiêu】";
+            DauTu = "【Đầu tư】";
+            TietKiem = "【Tiết kiệm】";
+            KinhDoanh = "【Kinh doanh】";
 
-            DaSuDung = DaAnUong + DaDuLich + DaTietKiem + DaDauTu + DaMuaSam;
+            ChiTieuConLai = "【Chi tiêu】";
+            DauTuConLai = "【Đầu tư】";
+            TietKiemConLai = "【Tiết kiệm】";
+            KinhDoanhConLai = "【Kinh doanh】";
 
-            TongConLai = Luong + DaSuDung;
-            AnUongConLai = AnUong + DaAnUong;
-            DuLichConLai = DuLich + DaDuLich;
-            TietKiemConLai = TietKiem + DaTietKiem;
-            DauTuConLai = DauTu + DaDauTu;
-            MuaSamConLai = MuaSam + DaMuaSam;
-            TraNoConLai = TraNo + TraNoDaDung;
+            TongConLai = 0;
+            decimal amountChiTieu = 0;
+            decimal amountTietKiem = 0;
+            decimal amountDauTu = 0;
+            decimal amountKinhDoanh = 0;
 
-            if (TongConLai > 0)
+            foreach (var itemSetting in lstSetting)
             {
-                ColorTongConLai = "Green";
-            }
-            else
-            {
-                ColorTongConLai = "Red";
-            }
+                // get title
+                if (itemSetting.Tab.Equals("Chi tiêu"))
+                {
+                    ChiTieu += "\n - " + itemSetting.Code;
+                    ChiTieuConLai += "\n - " + itemSetting.Code;
+                }
+                else if (itemSetting.Tab.Equals("Tiết kiệm"))
+                {
+                    TietKiem += "\n - " + itemSetting.Code;
+                    TietKiemConLai += "\n - " + itemSetting.Code;
+                }
+                else if (itemSetting.Tab.Equals("Đầu tư"))
+                {
+                    DauTu += "\n - " + itemSetting.Code;
+                    DauTuConLai += "\n - " + itemSetting.Code;
+                }
+                else if (itemSetting.Tab == "Kinh doanh")
+                {
+                    KinhDoanh += "\n - " + itemSetting.Code;
+                    KinhDoanhConLai += "\n - " + itemSetting.Code;
+                }
+                // get amount
+                if (itemSetting.Tab == "" && itemSetting.Code.Equals("Chi tiêu"))
+                {
+                    amountChiTieu = Luong * itemSetting.Percent / 100;
+                }
+                else if (itemSetting.Tab == "" && itemSetting.Code.Equals("Tiết kiệm"))
+                {
+                    amountTietKiem = Luong * itemSetting.Percent / 100;
+                }
+                else if (itemSetting.Tab == "" && itemSetting.Code.Equals("Đầu tư"))
+                {
+                    amountDauTu = Luong * itemSetting.Percent / 100;
+                }
+                else if (itemSetting.Tab == "" && itemSetting.Code.Equals("Kinh doanh"))
+                {
+                    amountKinhDoanh = Math.Round(SpendsDB.GetSpends().Where(x => x.SpendTypeCode.Equals("Kinh doanh"))
+                                        .ToList().Sum(x => x.Amount), 2);
+                }
 
-            if (AnUongConLai > 0)
-            {
-                ColorAnUongConLai = "Green";
-            }
-            else
-            {
-                ColorAnUongConLai = "Red";
-            }
-
-            if (DuLichConLai > 0)
-            {
-                ColorDuLichConLai = "Green";
-            }
-            else
-            {
-                ColorDuLichConLai = "Red";
-            }
-
-            if (TietKiemConLai > 0)
-            {
-                ColorTietKiemConLai = "Green";
-            }
-            else
-            {
-                ColorTietKiemConLai = "Red";
             }
 
-            if (DauTuConLai > 0)
-            {
-                ColorDauTuConLai = "Green";
-            }
-            else
-            {
-                ColorDauTuConLai = "Red";
-            }
+            Luong += Math.Round(SpendsDB.GetSpends().Where(x => x.Tab == "" && x.SpendTypeCode.Equals("Kinh doanh"))
+                                        .ToList().Sum(x => x.Amount), 2);
 
-            if (MuaSamConLai > 0)
-            {
-                ColorMuaSamConLai = "Green";
-            }
-            else
-            {
-                ColorMuaSamConLai = "Red";
-            }
+            ThuChiTieu = "";
+            ThuTietKiem = "";
+            ThuDauTu = "";
+            ThuKinhDoanh = "";
+            DaChiTieu = "";
+            DaTietKiem = "";
+            DaDauTu = "";
+            DaKinhDoanh = "";
 
-            if (DaSuDung > 0)
-            {
-                ColorDaSuDung = "Green";
-            }
-            else
-            {
-                ColorDaSuDung = "Red";
-            }
+            AmountChiTieuConLai = "";
+            AmountTietKiemConLai = "";
+            AmountDauTuConLai = "";
+            AmountKinhDoanhConLai = "";
 
-            if (TraNoConLai > 0)
+            foreach (var itemSetting in lstSetting)
             {
-                ColorTraNoConLai = "Green";
-            }
-            else
-            {
-                ColorTraNoConLai = "Red";
+                if (itemSetting.Tab.Equals("Chi tiêu"))
+                {
+                    var chiTieu = (amountChiTieu * itemSetting.Percent / 100) + Math.Round(SpendsDB.GetSpends().Where(x => x.SpendTypeCode.Equals(itemSetting.Code) && x.Amount > 0)
+                                        .ToList().Sum(x => x.Amount), 2);
+
+                    ThuChiTieu += "\n" + (chiTieu).ToString("#,##0.#") + " VNĐ";
+
+
+                    var daTieu = Math.Round(SpendsDB.GetSpends().Where(x => x.SpendTypeCode.Equals(itemSetting.Code) && x.Amount < 0)
+                                        .ToList().Sum(x => x.Amount), 2);
+                    DaChiTieu += "\n" + daTieu.ToString("#,##0.#") + " VNĐ";
+
+                    TongConLai += (chiTieu + daTieu);
+                    AmountChiTieuConLai += "\n" + (chiTieu + daTieu).ToString("#,##0.#") + " VNĐ";
+
+                }
+                else if (itemSetting.Tab.Equals("Tiết kiệm"))
+                {
+                    var chiTieu = (amountTietKiem * itemSetting.Percent / 100) + Math.Round(SpendsDB.GetSpends().Where(x => x.SpendTypeCode.Equals(itemSetting.Code) && x.Amount > 0)
+                                        .ToList().Sum(x => x.Amount), 2);
+
+                    ThuTietKiem += "\n" + (chiTieu).ToString("#,##0.#") + " VNĐ";
+
+
+                    var daTieu = Math.Round(SpendsDB.GetSpends().Where(x => x.SpendTypeCode.Equals(itemSetting.Code) && x.Amount < 0)
+                                        .ToList().Sum(x => x.Amount), 2);
+                    DaTietKiem += "\n" + daTieu.ToString("#,##0.#") + " VNĐ";
+
+                    TongConLai += (chiTieu + daTieu);
+
+                    AmountTietKiemConLai += "\n" + (chiTieu + daTieu).ToString("#,##0.#") + " VNĐ";
+
+                }
+                else if (itemSetting.Tab.Equals("Đầu tư"))
+                {
+                    var chiTieu = (amountDauTu * itemSetting.Percent / 100) + Math.Round(SpendsDB.GetSpends().Where(x => x.SpendTypeCode.Equals(itemSetting.Code) && x.Amount > 0)
+                                        .ToList().Sum(x => x.Amount), 2);
+
+                    ThuDauTu += "\n" + (chiTieu).ToString("#,##0.#") + " VNĐ";
+
+
+                    var daTieu = Math.Round(SpendsDB.GetSpends().Where(x => x.SpendTypeCode.Equals(itemSetting.Code) && x.Amount < 0)
+                                        .ToList().Sum(x => x.Amount), 2);
+                    DaDauTu += "\n" + daTieu.ToString("#,##0.#") + " VNĐ";
+                    TongConLai += (chiTieu + daTieu);
+                    AmountDauTuConLai += "\n" + (chiTieu + daTieu).ToString("#,##0.#") + " VNĐ";
+
+                }
+                else if (itemSetting.Tab.Equals("Kinh doanh"))
+                {
+                    var chiTieu = (amountKinhDoanh * itemSetting.Percent / 100) + Math.Round(SpendsDB.GetSpends().Where(x => x.SpendTypeCode.Equals(itemSetting.Code) && x.Amount > 0)
+                                        .ToList().Sum(x => x.Amount), 2);
+
+                    ThuKinhDoanh += "\n" + (chiTieu).ToString("#,##0.#") + " VNĐ";
+
+
+                    var daTieu = Math.Round(SpendsDB.GetSpends().Where(x => x.SpendTypeCode.Equals(itemSetting.Code) && x.Amount < 0)
+                                        .ToList().Sum(x => x.Amount), 2);
+                    DaKinhDoanh += "\n" + daTieu.ToString("#,##0.#") + " VNĐ";
+                    TongConLai += (chiTieu + daTieu);
+                    AmountKinhDoanhConLai += "\n" + (chiTieu + daTieu).ToString("#,##0.#") + " VNĐ";
+                }
             }
 
             base.OnPropertyChanged(nameof(Luong));
             base.OnPropertyChanged(nameof(ConLai));
             base.OnPropertyChanged(nameof(TongConLai));
-            base.OnPropertyChanged(nameof(No));
 
-            base.OnPropertyChanged(nameof(AnUong));
-            base.OnPropertyChanged(nameof(DuLich));
+            base.OnPropertyChanged(nameof(ChiTieu));
             base.OnPropertyChanged(nameof(TietKiem));
             base.OnPropertyChanged(nameof(DauTu));
-            base.OnPropertyChanged(nameof(MuaSam));
-            base.OnPropertyChanged(nameof(TraNo));
+            base.OnPropertyChanged(nameof(KinhDoanh));
 
-            base.OnPropertyChanged(nameof(TraNoConLai));
-            base.OnPropertyChanged(nameof(AnUongConLai));
-            base.OnPropertyChanged(nameof(DuLichConLai));
+            base.OnPropertyChanged(nameof(ThuChiTieu));
+            base.OnPropertyChanged(nameof(ThuTietKiem));
+            base.OnPropertyChanged(nameof(ThuDauTu));
+            base.OnPropertyChanged(nameof(ThuKinhDoanh));
+
+            base.OnPropertyChanged(nameof(ChiTieuConLai));
             base.OnPropertyChanged(nameof(TietKiemConLai));
             base.OnPropertyChanged(nameof(DauTuConLai));
-            base.OnPropertyChanged(nameof(MuaSamConLai));
-            base.OnPropertyChanged(nameof(TraNoConLai));
+            base.OnPropertyChanged(nameof(KinhDoanhConLai));
 
-            base.OnPropertyChanged(nameof(DaAnUong));
-            base.OnPropertyChanged(nameof(DaDuLich));
+            base.OnPropertyChanged(nameof(AmountChiTieuConLai));
+            base.OnPropertyChanged(nameof(AmountTietKiemConLai));
+            base.OnPropertyChanged(nameof(AmountDauTuConLai));
+            base.OnPropertyChanged(nameof(AmountKinhDoanhConLai));
+
+            base.OnPropertyChanged(nameof(DaChiTieu));
             base.OnPropertyChanged(nameof(DaTietKiem));
             base.OnPropertyChanged(nameof(DaDauTu));
-            base.OnPropertyChanged(nameof(DaMuaSam));
             base.OnPropertyChanged(nameof(DaSuDung));
+            base.OnPropertyChanged(nameof(DaKinhDoanh));
             base.OnPropertyChanged(nameof(ColorDaSuDung));
-            base.OnPropertyChanged(nameof(ColorTraNoConLai));
 
         }
     }

@@ -255,7 +255,7 @@ namespace MoneyManagement.ViewModels.TotalSpend
                 }
             }
 
-            var data = SpendsDB.GetSpends().Where(x => x.DateNo.Month == DateTimeNew.Month);
+
 
 
             base.OnPropertyChanged(nameof(Luong));
