@@ -25,7 +25,7 @@ namespace MoneyManagement.Services
             settings.Code = "Chi tiêu";
             settings.Name = "Chi tiêu 一【Vốn】";
 
-            settings.Percent = 50;
+            settings.Percent = 60;
 
             data.Add(settings);
 
@@ -50,7 +50,7 @@ namespace MoneyManagement.Services
             settings.Code = "Tiết kiệm";
             settings.Name = "Tiết kiệm 一【Vốn】";
 
-            settings.Percent = 50;
+            settings.Percent = 40;
             data.Add(settings);
 
             settings = new Settings();
