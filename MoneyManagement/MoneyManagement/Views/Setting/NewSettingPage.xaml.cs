@@ -33,6 +33,7 @@ namespace MoneyManagement.Views.Setting
 
             SettingType = new ObservableCollection<string>()
             {
+                "",
                 "Chi tiêu (30%)",
                 "Tiết kiệm (30%)",
                 "Đầu tư (40%)"
