@@ -159,7 +159,8 @@ namespace MoneyManagement.ViewModels.TotalAllMoney
                 }
                 else if (itemSetting.Tab == "" && itemSetting.Code.Equals("Đầu tư"))
                 {
-                    amountDauTu = Luong * itemSetting.Percent / 100;
+                    amountDauTu = Math.Round(SpendsDB.GetSpends().Where(x => x.SpendTypeCode.Equals("Đầu tư"))
+                                        .ToList().Sum(x => x.Amount), 2);
                 }
                 else if (itemSetting.Tab == "" && itemSetting.Code.Equals("Kinh doanh"))
                 {

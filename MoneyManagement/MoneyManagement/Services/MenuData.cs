@@ -50,7 +50,7 @@ namespace MoneyManagement.Services
             settings.Code = "Tiết kiệm";
             settings.Name = "Tiết kiệm 一【Vốn】";
 
-            settings.Percent = 30;
+            settings.Percent = 50;
             data.Add(settings);
 
             settings = new Settings();
@@ -74,7 +74,7 @@ namespace MoneyManagement.Services
             settings.Code = "Đầu tư";
             settings.Name = "Đầu tư 一【Vốn】";
 
-            settings.Percent = 20;
+            settings.Percent = 100;
             data.Add(settings);
 
             settings = new Settings();
