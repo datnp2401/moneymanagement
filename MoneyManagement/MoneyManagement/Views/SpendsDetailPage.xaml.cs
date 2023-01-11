@@ -20,9 +20,9 @@ namespace MoneyManagement.Views
         SpendsDetailViewModel SpendsDetailViewModel;
 
         public SpendsItem SpendsItem { get; set; } = new SpendsItem();
-        public ObservableCollection<string> SpendType { get; set; }
+        public ObservableCollection<Settings> SpendType { get; set; }
         public int ChooseSpendIndex { get; set; }
-        public string ChooseSpendType { get; set; }
+        public Settings ChooseSpendType { get; set; }
 
         public SpendsDB SpendsDB = new SpendsDB();
         public SettingsDB SettingsDB = new SettingsDB();
@@ -56,11 +56,11 @@ namespace MoneyManagement.Views
 
             List<Settings> lstSetting = SettingsDB.GetSettings().OrderBy(x => x.Tab).ToList();
 
-            SpendType = new ObservableCollection<string>();
+            SpendType = new ObservableCollection<Settings>();
 
             foreach (var item in lstSetting)
             {
-                SpendType.Add(item.Name);
+                SpendType.Add(item);
             }
 
             if (spendsItem != null && string.IsNullOrEmpty(spendsItem.TextColor))
@@ -84,12 +84,13 @@ namespace MoneyManagement.Views
 
             for (int i = 0; i < SpendType.Count; i++)
             {
-                if (SpendType[i].Equals(SpendsItem.SpendType))
+                if (SpendType[i].Name.Equals(SpendsItem.SpendType))
                 {
                     ChooseSpendIndex = i;
+                    ChooseSpendType = SpendType[i];
                 }
             }
-            ChooseSpendType = SpendsItem.SpendType;
+
 
             BindingContext = this;
 
@@ -98,11 +99,15 @@ namespace MoneyManagement.Views
 
         async void EditItem_Clicked(object sender, EventArgs e)
         {
-            SpendsItem.SpendType = ChooseSpendType;
+            SpendsItem.SpendType = ChooseSpendType.Name;
+            SpendsItem.SpendTypeCode = ChooseSpendType.Code;
+            SpendsItem.Tab = ChooseSpendType.Tab;
 
             Spends spends = new Spends();
             spends.Id = SpendsItem.Id;
-            spends.SpendType = ChooseSpendType;
+            spends.SpendTypeCode = ChooseSpendType.Code;
+            spends.SpendType = ChooseSpendType.Name;
+            spends.Tab = ChooseSpendType.Tab;
             spends.Content = SpendsItem.Content;
             spends.Address = SpendsItem.Address;
 

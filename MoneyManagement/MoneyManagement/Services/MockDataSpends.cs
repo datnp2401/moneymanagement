@@ -29,6 +29,7 @@ namespace MoneyManagement.Services
                 spendsItem.DateNo = lst[i].DateNo;
                 spendsItem.Amount = lst[i].Amount;
                 spendsItem.SpendType = lst[i].SpendType;
+                spendsItem.SpendTypeCode = lst[i].SpendTypeCode;
                 spendsItem.TextColor = lst[i].TextColor;
                 spendsItem.Tab = lst[i].Tab;
 

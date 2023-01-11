@@ -42,6 +42,13 @@ namespace MoneyManagement.Models
             set { SetProperty<string>(ref _SpendType, value, () => OnPropertyChanged(nameof(SpendType))); }
         }
 
+        private string _SpendTypeCode;
+        public string SpendTypeCode
+        {
+            get => _SpendTypeCode;
+            set { SetProperty<string>(ref _SpendTypeCode, value, () => OnPropertyChanged(nameof(SpendTypeCode))); }
+        }
+
         private string _Tab;
         public string Tab
         {

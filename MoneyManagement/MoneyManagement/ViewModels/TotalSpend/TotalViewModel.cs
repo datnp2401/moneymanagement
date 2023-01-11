@@ -90,7 +90,7 @@ namespace MoneyManagement.ViewModels.TotalSpend
             try
             {
 
-                await OnChangeAll();
+                OnChangeAll();
             }
             catch (Exception ex)
             {

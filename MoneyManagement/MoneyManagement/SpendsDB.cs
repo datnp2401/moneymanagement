@@ -46,6 +46,7 @@ namespace MoneyManagement
                 d1.Amount = spends.Amount;
                 d1.DateNo = spends.DateNo;
                 d1.SpendType = spends.SpendType;
+                d1.SpendTypeCode = spends.SpendTypeCode;
                 d1.TextColor = spends.TextColor;
                 d1.Tab = spends.Tab;
 
