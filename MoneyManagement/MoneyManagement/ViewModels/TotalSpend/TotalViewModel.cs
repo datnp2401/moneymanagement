@@ -18,7 +18,7 @@ namespace MoneyManagement.ViewModels.TotalSpend
 
         public string CurrentDate { get; set; } = "Tổng Thu - Chi tháng " + DateTime.Now.ToString("MM/yyyy");
 
-        public string Date { get; set; } = DateTime.Now.ToString("MM/yyyy");
+        public DateTime Date { get; set; } = DateTime.Now;
         public string Title { get; set; } = "Tổng Tháng";
 
         public decimal Luong { get; set; }
@@ -104,12 +104,13 @@ namespace MoneyManagement.ViewModels.TotalSpend
 
         async Task OnChangeAll()
         {
-            var DateTimeNew = DateTime.Parse(Date);
+            //var DateTimeNew = DateTime.Parse(Date);
 
-            CurrentDate = "Tổng Thu - Chi tháng " + DateTimeNew.ToString("MM/yyyy");
+            CurrentDate = "Tổng Thu - Chi tháng " + Date.ToString("MM/yyyy");
             Luong = 0;
             List<Settings> lstSetting = SettingsDB.GetSettings().OrderBy(x => x.Tab).ToList();
-            Luong = SpendsDB.GetSpends().Where(x => x.SpendTypeCode.Equals("Lương")).Where(x => x.DateNo.Month == DateTimeNew.Month).ToList().Sum(x => x.Amount);
+            Luong = SpendsDB.GetSpends().Where(x => x.SpendTypeCode.Equals("Lương")).Where(x => x.DateNo.Month == Date.Month
+                                                && x.DateNo.Year == Date.Year).ToList().Sum(x => x.Amount);
 
 
             ChiTieu = "【Chi tiêu】";
@@ -162,18 +163,24 @@ namespace MoneyManagement.ViewModels.TotalSpend
                 }
                 else if (itemSetting.Tab == "" && itemSetting.Code.Equals("Đầu tư"))
                 {
-                    amountDauTu = Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == DateTimeNew.Month && x.SpendTypeCode.Equals("Đầu tư"))
+                    amountDauTu = Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == Date.Month
+                                        && x.DateNo.Year == Date.Year
+                                        && x.SpendTypeCode.Equals("Đầu tư"))
                                         .ToList().Sum(x => x.Amount), 2);
                 }
                 else if (itemSetting.Tab == "" && itemSetting.Code.Equals("Kinh doanh"))
                 {
-                    amountKinhDoanh = Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == DateTimeNew.Month && x.SpendTypeCode.Equals("Kinh doanh"))
+                    amountKinhDoanh = Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == Date.Month
+                                        && x.DateNo.Year == Date.Year
+                                        && x.SpendTypeCode.Equals("Kinh doanh"))
                                         .ToList().Sum(x => x.Amount), 2);
                 }
 
             }
 
-            Luong += Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == DateTimeNew.Month && x.Tab == "" && x.SpendTypeCode.Equals("Kinh doanh"))
+            Luong += Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == Date.Month && x.Tab == ""
+                                        && x.DateNo.Year == Date.Year
+                                        && x.SpendTypeCode.Equals("Kinh doanh"))
                                         .ToList().Sum(x => x.Amount), 2);
 
             ThuChiTieu = "";
@@ -194,13 +201,15 @@ namespace MoneyManagement.ViewModels.TotalSpend
             {
                 if (itemSetting.Tab.Equals("Chi tiêu"))
                 {
-                    var chiTieu = (amountChiTieu * itemSetting.Percent / 100) + Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == DateTimeNew.Month && x.SpendTypeCode.Equals(itemSetting.Code) && x.Amount > 0)
+                    var chiTieu = (amountChiTieu * itemSetting.Percent / 100) + Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == Date.Month
+                                                                                                        && x.DateNo.Year == Date.Year && x.SpendTypeCode.Equals(itemSetting.Code) && x.Amount > 0)
                                         .ToList().Sum(x => x.Amount), 2);
 
                     ThuChiTieu += "\n" + (chiTieu).ToString("#,##0.#") + " VNĐ";
 
 
-                    var daTieu = Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == DateTimeNew.Month && x.SpendTypeCode.Equals(itemSetting.Code) && x.Amount < 0)
+                    var daTieu = Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == Date.Month
+                                                                && x.DateNo.Year == Date.Year && x.SpendTypeCode.Equals(itemSetting.Code) && x.Amount < 0)
                                         .ToList().Sum(x => x.Amount), 2);
                     DaChiTieu += "\n" + daTieu.ToString("#,##0.#") + " VNĐ";
 
@@ -210,13 +219,15 @@ namespace MoneyManagement.ViewModels.TotalSpend
                 }
                 else if (itemSetting.Tab.Equals("Tiết kiệm"))
                 {
-                    var chiTieu = (amountTietKiem * itemSetting.Percent / 100) + Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == DateTimeNew.Month && x.SpendTypeCode.Equals(itemSetting.Code) && x.Amount > 0)
+                    var chiTieu = (amountTietKiem * itemSetting.Percent / 100) + Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == Date.Month
+                                    && x.DateNo.Year == Date.Year && x.SpendTypeCode.Equals(itemSetting.Code) && x.Amount > 0)
                                         .ToList().Sum(x => x.Amount), 2);
 
                     ThuTietKiem += "\n" + (chiTieu).ToString("#,##0.#") + " VNĐ";
 
 
-                    var daTieu = Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == DateTimeNew.Month && x.SpendTypeCode.Equals(itemSetting.Code) && x.Amount < 0)
+                    var daTieu = Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == Date.Month
+                                    && x.DateNo.Year == Date.Year && x.SpendTypeCode.Equals(itemSetting.Code) && x.Amount < 0)
                                         .ToList().Sum(x => x.Amount), 2);
                     DaTietKiem += "\n" + daTieu.ToString("#,##0.#") + " VNĐ";
 
@@ -227,14 +238,17 @@ namespace MoneyManagement.ViewModels.TotalSpend
                 }
                 else if (itemSetting.Tab.Equals("Đầu tư"))
                 {
-                    var chiTieu = (amountDauTu * itemSetting.Percent / 100) + Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == DateTimeNew.Month && x.SpendTypeCode.Equals(itemSetting.Code) && x.Amount > 0)
+                    var chiTieu = (amountDauTu * itemSetting.Percent / 100) + Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == Date.Month
+                                                && x.DateNo.Year == Date.Year && x.SpendTypeCode.Equals(itemSetting.Code) && x.Amount > 0)
                                         .ToList().Sum(x => x.Amount), 2);
 
                     ThuDauTu += "\n" + (chiTieu).ToString("#,##0.#") + " VNĐ";
 
 
-                    var daTieu = Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == DateTimeNew.Month && x.SpendTypeCode.Equals(itemSetting.Code) && x.Amount < 0)
+                    var daTieu = Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == Date.Month
+                    && x.DateNo.Year == Date.Year && x.SpendTypeCode.Equals(itemSetting.Code) && x.Amount < 0)
                                         .ToList().Sum(x => x.Amount), 2);
+
                     DaDauTu += "\n" + daTieu.ToString("#,##0.#") + " VNĐ";
                     TongConLai += (chiTieu + daTieu);
                     AmountDauTuConLai += "\n" + (chiTieu + daTieu).ToString("#,##0.#") + " VNĐ";
@@ -242,13 +256,15 @@ namespace MoneyManagement.ViewModels.TotalSpend
                 }
                 else if (itemSetting.Tab.Equals("Kinh doanh"))
                 {
-                    var chiTieu = (amountKinhDoanh * itemSetting.Percent / 100) + Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == DateTimeNew.Month && x.SpendTypeCode.Equals(itemSetting.Code) && x.Amount > 0)
+                    var chiTieu = (amountKinhDoanh * itemSetting.Percent / 100) + Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == Date.Month
+                    && x.DateNo.Year == Date.Year && x.SpendTypeCode.Equals(itemSetting.Code) && x.Amount > 0)
                                         .ToList().Sum(x => x.Amount), 2);
 
                     ThuKinhDoanh += "\n" + (chiTieu).ToString("#,##0.#") + " VNĐ";
 
 
-                    var daTieu = Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == DateTimeNew.Month && x.SpendTypeCode.Equals(itemSetting.Code) && x.Amount < 0)
+                    var daTieu = Math.Round(SpendsDB.GetSpends().Where(x => x.DateNo.Month == Date.Month && x.SpendTypeCode.Equals(itemSetting.Code)
+                    && x.DateNo.Year == Date.Year && x.Amount < 0)
                                         .ToList().Sum(x => x.Amount), 2);
                     DaKinhDoanh += "\n" + daTieu.ToString("#,##0.#") + " VNĐ";
                     TongConLai += (chiTieu + daTieu);
